@@ -1,7 +1,9 @@
 from django.shortcuts import render,HttpResponse,redirect
 from JOBSEEKER.models import JOBSEEKER
 from EMPLOYER.models import EMPLOYER
-
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
 def indexhome(request):
     # return HttpResponse("Ok initial set up ok")
     #The very function which will be invoked
@@ -23,5 +25,25 @@ def handleuser(request):
         return render(request,'BASE/login.html/')        
     
        
+def handlelogin(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(username=username,password=password)
+        data={}
+        if user is not None:
+            login(request,user)
+            data={
+                'is_ok':1
+            }
+        else:
+            data={
+                'is_ok':0
+            }    
+        
+        return JsonResponse(data)
+
+    else:
+        return redirect('/')    
 
 

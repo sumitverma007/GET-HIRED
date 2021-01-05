@@ -1,0 +1,8 @@
+04.1.2020
+Added end points for Jobseeker and Employer ..
+Added new app  called "BASE" to handle the basic operations such as log in and redirecting to respective views
+
+Next to do:
+         1.Design a Login page use ajax to send data and verify login
+            and then send their users to their respective homes
+         2.Design JOBSEEKER Home page

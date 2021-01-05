@@ -6,8 +6,8 @@ def home(request):
     
     if not request.user.is_authenticated:
         #send them to home
-        # return redirect('/')
-        return HttpResponse("USer not authenticated")
+        return redirect('/')
+        # return HttpResponse("USer not authenticated")
     #check if employer is trying to enter here by manually typing url
     else:
         try:
