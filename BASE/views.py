@@ -47,3 +47,28 @@ def handlelogin(request):
         return redirect('/')    
 
 
+def handlesignup(request):
+    # return HttpResponse("Signup Here")
+    if request.method == 'POST':
+        return HttpResponse("WIll save user data")
+        #will save data
+    else:
+        return render(request,'BASE/signup.html')    
+
+
+def validateusername(request):
+    # print(request.method) 
+    username=request.GET.get('username',None)
+    if username is None:
+        return redirect("/")
+    else:
+        data={}
+        p1=User.objects.filter(username__iexact=username).exists()
+        # print(p1)
+        data={
+            'is_ok':p1
+        }
+        return JsonResponse(data)
+
+          
+    

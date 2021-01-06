@@ -23,5 +23,4 @@ urlpatterns = [
     path('',include('BASE.urls')),
     path('JOBSEEKER/',include('JOBSEEKER.urls')),
     path('EMPLOYER/',include('EMPLOYER.urls')),
-]
-# +static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

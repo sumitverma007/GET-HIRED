@@ -6,3 +6,17 @@ Next to do:
          1.Design a Login page use ajax to send data and verify login
             and then send their users to their respective homes
          2.Design JOBSEEKER Home page
+
+05.1.2020
+-> Designed login for user(jobseeker and employer),Used Ajax with json to send and fetch  data .
+
+Next to do:
+         1.Design Signup page for both user
+         
+
+
+06.01.2020
+Added Jobseeker registration form.With username validation and all credential validation
+ Next to do:
+         1.Save Jobseeker info into database
+         2.Design Employer Registration page.         
