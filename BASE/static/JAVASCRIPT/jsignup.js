@@ -40,3 +40,4 @@ if(alpha==1 && num==1 && password.length>=8){
 return false;
 
     }
+

@@ -10,10 +10,15 @@
     <link rel="stylesheet" href="{% static 'CSS/signup.css/' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script src="{% static 'JAVASCRIPT/jsignup.js/' %}"></script
-   
+ <script src="{% static 'JAVASCRIPT/jsignup.js/' %}"></script>
   </head>
   <body>
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>Registration Failed:</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
    <div class="centered">
    <div class="row">
    <div class="col text-center">
@@ -37,15 +42,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <form action="#" onsubmit="return validateJform()"  method="POST">{% csrf_token %}
+       <form action="/JOBSEEKER/registerjobseeker/" onsubmit="return validateJform()"  method="POST" enctype="multipart/form-data">{% csrf_token %}
         <div class="mb-3">
             <label for="jUsername" class="form-label"> Enter Username<span class="req">*</span></label>
-            <input type="text" class="form-control" id="jUsername" placeholder="Enter Username" aria-describedby="jUsernameValid" required></input>
+            <input type="text" class="form-control" id="jUsername" name="jUsername" placeholder="Enter Username" aria-describedby="jUsernameValid" required></input>
             <div id="jUsernameValid" class="form-text"></div>
         </div>
          <div class="mb-3">
             <label for="jPassword" class="form-label"> Enter Password<span class="req">*</span></label>
-            <input type="Password" class="form-control" id="jPassword" placeholder="Enter Password" aria-describedby="jPasswordHelp" required></input>
+            <input type="Password" class="form-control" id="jPassword" name="jPassword" placeholder="Enter Password" aria-describedby="jPasswordHelp" required></input>
             <small class=" form-text" id="invalidPassword"></small>
             <div id="jPasswordHelp" class="form-text">Password should be atleast 8 charactter long and should contain atleast one alphabet and one number</div>
         </div>
@@ -56,31 +61,36 @@
         </div>
         <div class="mb-3">
             <label for="jemail" class="form-label"> Enter Email Address<span class="req">*</span></label>
-            <input type="email" class="form-control" id="jemail" placeholder="Enter your Email"  required></input>
+            <input type="email" class="form-control" id="jemail" name="jemail" placeholder="Enter your Email"  required></input>
+            
+        </div>
+        <div class="mb-3">
+            <label for="jPhone" class="form-label"> Enter Phone Number(Without country code)<span class="req">*</span></label>
+            <input type="text" class="form-control" id="jPhone" name="jPhone" placeholder="Enter your phone number"  required></input>
             
         </div>
        <div class="input-group mb-3">
-            <input type="text" class="form-control" id="jFirstName" placeholder="Enter Your First Name" required></input>
-            <input type="text" class="form-control" id="jLastName"  placeholder="Enter Your Last Name" required></input>
+            <input type="text" class="form-control" id="jFirstName" name="jFirstName" placeholder="Enter Your First Name" required></input>
+            <input type="text" class="form-control" id="jLastName" name="jLastName" placeholder="Enter Your Last Name" required></input>
             <small class="form-text text-danger" id="jNameError"></small>
         </div>
            <div class="input-group mb-3">
-            <input type="text" class="form-control" id="jXmarks" placeholder=" 10th marks (in %)" required></input>
-            <input type="text" class="form-control" id="jXiimarks"  placeholder="12th Marks (in %)" required></input>
-         <input type="text" class="form-control" id="jGradmarks"  placeholder="Graduation Marks (in %)" required></input>
+            <input type="text" class="form-control" id="jXmarks" name="jXmarks" placeholder=" 10th marks (in %)" required></input>
+            <input type="text" class="form-control" id="jXiimarks" name="jXiimarks" placeholder="12th Marks (in %)" required></input>
+         <input type="text" class="form-control" id="jGradmarks" name="jGradmarks" placeholder="Graduation Marks (in %)" required></input>
 
         </div>
         <div class="mb-3">
         <label for="jDob" class="form-label">Enter Your Date of Birth</label>
-        <input type="date" class="form-control" required></input>
+        <input type="date" class="form-control" name="jDob" id="jDob" required></input>
         </div>
         <div class="mb-3">
         <label for="jProfilePic" class="form-label">Upload Your Picture</label>
-        <input type="file" id="jProfilePic" class="form-control"></input>
+        <input type="file" id="jProfilePic" name="jProfilePic" class="form-control"></input>
         </div>
         <div class="mb-3">
         <label for="jResume" class="form-label">Upload Your Resume</label>
-        <input type="file" id="jResume" class="form-control"></input>
+        <input type="file" id="jResume" name="jResume" class="form-control"></input>
         </div>
         <div class="mb-3 text-center">
          <button class="btn btn-success" type="submit">Submit</button>
@@ -97,16 +107,53 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" >EMPLOYER</h5>
+        <h5 class="modal-title" >EMPLOYER REGISTRATION</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <form action="/EMPLOYER/registeremployer/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="mb-3">
+            <label for="eUsername" class="form-label"> Enter Username<span class="req">*</span></label>
+            <input type="text" class="form-control" id="eUsername" name="eUsername" placeholder="Enter Username" aria-describedby="jUsernameValid" required></input>
+            <div id="eUsernameValid" class="form-text"></div>
+        </div>
+          <div class="mb-3">
+            <label for="eEmail" class="form-label"> Enter Email Address<span class="req">*</span></label>
+            <input type="text" class="form-control" id="eEmail" name="eEmail" placeholder="Enter Email Address"  required></input>
+           
+        </div>
+         <div class="mb-3">
+            <label for="ePassword" class="form-label"> Enter Password<span class="req">*</span></label>
+            <input type="Password" class="form-control" id="ePassword" name="ePassword" placeholder="Enter Password" aria-describedby="jPasswordHelp" required></input>
+            <small class=" form-text" id="einvalidPassword"></small>
+            <div id="ePasswordHelp" class="form-text">Password should be atleast 8 charactter long and should contain atleast one alphabet and one number</div>
+        </div>
+         <div class="mb-3">
+            <label for="ePassword2" class="form-label"> Enter Password Again<span class="req">*</span></label>
+            <input type="Password" class="form-control" id="ePassword2" placeholder="Enter Password again"  required></input>
+            <small class="text-danger form-text" id="ePasswordNotSame"></small>
+        </div>
+
+         <div class="mb-3">
+            <label for="eCin" class="form-label"> Enter CIN Number<span class="req">*</span></label>
+            <input type="text" class="form-control" id="eCin" name="eCin" placeholder="Enter CIN Number"  required></input>
+           
+        </div>
+         <div class="mb-3">
+            <label for="eName" class="form-label"> Enter Firm Name<span class="req">*</span></label>
+            <input type="text" class="form-control" id="eName" name="eName" placeholder="Enter Company Name" aria-describedby="jUsernameValid" required></input>
+
+        </div>
+        <div class="mb-3">
+        <label for="eProfilepic" class="form-label">Upload Your Picture</label>
+        <input type="file" id="eProfilepic" name="eProfilepic" class="form-control"></input>
+        </div>
+      <div class="mb-3 text-center">
+         <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+        </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+     
     </div>
   </div>
 </div>
@@ -183,7 +230,71 @@ $.ajax({
 
 });
 });
+$("#eUsername").change(function(){
+        let username=$(this).val();
+        let validusername=document.getElementById('eUsernameValid');
+        $.ajax({
+            url:'/validate_username/',
+            data:{
+                'username':username
+            },
+            dataType:'json',
+            success:function(data){
+                if(!data.is_ok){
+                    validusername.style.color="green";
+                    validusername.innerHTML="Username available";
+                }
+                else{
+                    validusername.style.color="red";
+                    validusername.innerHTML="username not available";
+                }
+            }
+        });
+    });
+  $("#ePassword").change(function(){
+  
+        let pass=$(this).val();
+        
+        let alpha=0;
+        let num=0;
+        let len=pass.length;
+        let lenok=0;
+        if (len >= 8){
+            lenok=1;
+        }
+        let i;
+        for(i=0;i<len;i++){
+            if((pass[i]>='a' && pass[i]<='z')||(pass[i]>='A' &&  pass[i]<='Z')){
+                alpha=1;
+            }
+            if(pass[i]>=0 && pass[i]<=9){
+                num=1;
+            }
+        }
+        let invalidpass=document.getElementById('einvalidPassword');
+        
+        if(alpha==1 && num==1 && lenok==1){
+            invalidpass.style.color="green";
+            invalidpass.innerHTML="Its a valid Password";
+        }
+        else{
+           invalidpass.style.color="red";
+        invalidpass.innerHTML="Invalid Password";
+        }
+        });
+        
+  $("#ePassword2").change(function(){
+        let pass1=$("#ePassword").val();
+        let pass2=$(this).val();
+        if(pass1 != pass2){
+            document.getElementById('ePasswordNotSame').innerHTML="Password didn't match";
+                       document.getElementById('ePasswordNotSame').style.display="block";
 
+        }
+        else{
+            document.getElementById('ePasswordNotSame').style.display="none";
+        }
+        });
  </script>
   </body>
 </html>

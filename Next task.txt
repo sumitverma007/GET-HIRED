@@ -1,4 +1,4 @@
-04.1.2020
+04.1.2021
 Added end points for Jobseeker and Employer ..
 Added new app  called "BASE" to handle the basic operations such as log in and redirecting to respective views
 
@@ -7,7 +7,7 @@ Next to do:
             and then send their users to their respective homes
          2.Design JOBSEEKER Home page
 
-05.1.2020
+05.1.2021
 -> Designed login for user(jobseeker and employer),Used Ajax with json to send and fetch  data .
 
 Next to do:
@@ -15,8 +15,28 @@ Next to do:
          
 
 
-06.01.2020
+06.01.2021
 Added Jobseeker registration form.With username validation and all credential validation
  Next to do:
          1.Save Jobseeker info into database
-         2.Design Employer Registration page.         
+         2.Design Employer Registration page.  
+
+07.01.2021
+Added Employer registration page and username validation 
+Next to do:
+      1.Add a error message framework (in case of error while saving data)
+      2.Save job seeker info into database (if data ok)
+      3.Save Employer info into database (if data ok) 
+
+08.01.2021
+Added Error message framework.
+Next to do:
+     1.Save job seeker info into database (if data ok)
+     2.Save Employer info into database (if data ok)    
+
+09.01.2021
+added view to Save JOB seeker info into database
+added view to save Employer data to database
+Next to do:
+      1.Design Home Page for Jobseeker
+

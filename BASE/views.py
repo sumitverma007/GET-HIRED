@@ -49,12 +49,8 @@ def handlelogin(request):
 
 def handlesignup(request):
     # return HttpResponse("Signup Here")
-    if request.method == 'POST':
-        return HttpResponse("WIll save user data")
-        #will save data
-    else:
-        return render(request,'BASE/signup.html')    
-
+    return render(request,'BASE/signup.html')
+    
 
 def validateusername(request):
     # print(request.method) 
