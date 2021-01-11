@@ -40,3 +40,7 @@ added view to save Employer data to database
 Next to do:
       1.Design Home Page for Jobseeker
 
+11.01.2021
+Added Base template for Jobseeker
+Next to do:
+      1.Design Home Page for Job seeker

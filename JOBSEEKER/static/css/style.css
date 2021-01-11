@@ -1,0 +1,23 @@
+*{
+   
+    font-family: sans-serif;
+}
+.bg-dark {
+    background-color: #081b31!important;
+}
+.navbar{
+    padding-right:61px;
+}
+.navbar-brand{
+    background-color: aliceblue;
+}
+.navbar-brand img{
+    height: 30px;
+}
+.d-flex{
+    margin-right:20px;
+}
+.edit-prof a:hover{
+    color:rgb(236, 233, 233);
+    background-color:#858c94 ;
+}

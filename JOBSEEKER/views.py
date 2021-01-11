@@ -19,7 +19,7 @@ def home(request):
             #if valid jobseeker
             #design JOBSSKER HOME PAGE
             
-            return HttpResponse("VALID JOB SEEKER")
+            return render(request,'JOBSEEKER/home.html/')
         #if not a valid user
         except:
             # return HttpResponse("NOT vALID  JS")
