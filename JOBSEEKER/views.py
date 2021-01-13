@@ -18,8 +18,13 @@ def home(request):
             obj=JOBSEEKER.objects.get(user=request.user)
             #if valid jobseeker
             #design JOBSSKER HOME PAGE
-            
-            return render(request,'JOBSEEKER/home.html/')
+            user_qual=QUALIFICATIONS.objects.get(user=request.user)
+            param={
+                'jbasic':obj,
+                'jqual':user_qual,
+            }
+            print(user_qual.profile_pic)
+            return render(request,'JOBSEEKER/home.html/',param)
         #if not a valid user
         except:
             # return HttpResponse("NOT vALID  JS")

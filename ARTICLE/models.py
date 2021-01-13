@@ -8,6 +8,7 @@ class ARTICLE(models.Model):
     article_desc=models.TextField(blank=True)
     article_media=models.ImageField(upload_to='ARTICLE/MEDIA/',blank=True)
     employer_name=models.ForeignKey(EMPLOYER,on_delete=models.CASCADE)
+    time_stamp=models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.article_id+ ' by '+self.employer_name.name

@@ -5,5 +5,26 @@
 {% block homeactive %}active
 {% endblock homeactive %}active
 {% block content %}
-<h1>This is the wae</h1>
+<div class="row mt-2 text-light">
+<div class="col ml-1 sm-10  article_content">
+ <div class="media  p-3">
+   <strong class="d-inline-block mb-2 content-tag">World</strong>
+  <p>
+     <img src="/media/{{jqual.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
+     <span class="content-author">
+     John Doe </span><small><i>Posted on February 19, 2016</i></small></p>
+        <div class="media-body">
+        <p class="content-title">Duniya hai pareshan kyu??</p>
+      <p class="content-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+      <div class="content-img mt-2 p-2">
+    {% load static %}
+       <img src="{% static 'images/byoda.jpg/' %}" alt="Image"></img>
+      </div>  
+    </div>
+  </div>
+</div>
+<div class="col aside-content sm-2">
+Follow these companies as well
+</div>
+</div>
 {% endblock content %}

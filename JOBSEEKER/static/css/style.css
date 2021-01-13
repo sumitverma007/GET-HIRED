@@ -1,6 +1,12 @@
 *{
    
     font-family: sans-serif;
+    
+   
+}
+
+body{
+    background-color: #081b31!important;
 }
 .bg-dark {
     background-color: #081b31!important;
@@ -21,3 +27,47 @@
     color:rgb(236, 233, 233);
     background-color:#858c94 ;
 }
+
+.user_img img{
+    width:60px;
+}
+.row{
+    margin-left:0;
+}
+.article_content{
+    width:100%;
+    border:1px solid black;
+    border-radius: 10px;
+    background-color: #3439489e;
+}
+.profile_img{
+    border:1px solid #00A699;
+    width:30px;
+    
+  
+}
+.content-img img{
+    width:100%;
+    border: 1px solid #becad8;
+    border-radius: 5px;
+    height: inherit;
+}
+.content-tag{
+    color:#FF9900;
+}
+.content-title{
+    color:#36C5F0;
+    font-weight: bolder;
+}
+
+.content-author{
+    color:#00A699;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+@media screen and (max-width: 600px) {
+ .aside-content{
+     display: none;
+ }
+  }

@@ -44,3 +44,10 @@ Next to do:
 Added Base template for Jobseeker
 Next to do:
       1.Design Home Page for Job seeker
+
+13.01.2021
+Added Skeleton for job seeker home page
+Next to do:
+      1.Add follow model
+      2.manage article posts ,based on logged in user
+      3.Use target articles on home page
