@@ -51,3 +51,9 @@ Next to do:
       1.Add follow model
       2.manage article posts ,based on logged in user
       3.Use target articles on home page
+
+14.01.2021
+Added Follow Model and handled follow request
+Next to do:
+      1.Manage article posts based on logged in user
+            

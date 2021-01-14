@@ -6,7 +6,8 @@
 {% endblock homeactive %}active
 {% block content %}
 <div class="row mt-2 text-light">
-<div class="col ml-1 sm-10  article_content">
+<div class="col-md-8 ml-1  article_content">
+<!-- one article post starts here-->
  <div class="media  p-3">
    <strong class="d-inline-block mb-2 content-tag">World</strong>
   <p>
@@ -22,9 +23,44 @@
       </div>  
     </div>
   </div>
+  <!-- Article post ends here -->
 </div>
-<div class="col aside-content sm-2">
-Follow these companies as well
+<div class="col-md-4 p-2 aside-content">
+<div class="text-center">
+<h2 style="color:#FF9900;">Follow Employers</h2>
+</div>
+{% for emp in emp_i_should_follow %}
+<div class="row">
+<div class="col employer-name">
+{{emp.name|title}}
+</div>
+<div class="col employer-follow">
+<button type="button" role="submit" id="emp-{{emp.user.username}}" value="{{emp.user.username}}" class="btn btn-success">Follow</button>
+</div>
+
+</div>
+<script>
+$("#emp-{{emp.user.username}}").click(function(){
+let employer=$(this).val();
+$.ajax({
+   url:'/follow-employee/',
+   data:{
+     'employer':employer
+   },
+   dataType:'Json',
+   success:function(data){
+       document.getElementById("emp-{{emp.user.username}}").style.display="none";
+  
+   }
+
+});
+});
+
+
+</script>
+  <hr class="my-4">
+{% endfor %}
+
 </div>
 </div>
 {% endblock content %}

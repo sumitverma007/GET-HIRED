@@ -1,8 +1,10 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.core.files.storage import FileSystemStorage
 from .models import JOBSEEKER,QUALIFICATIONS
+from EMPLOYER.models import EMPLOYER
 from django.contrib.auth.models import User
 from django.contrib import messages
+from BASE.models import Follow
 from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 def home(request):
@@ -16,14 +18,29 @@ def home(request):
     else:
         try:
             obj=JOBSEEKER.objects.get(user=request.user)
-            #if valid jobseeker
-            #design JOBSSKER HOME PAGE
+            emp_reg=EMPLOYER.objects.all()
+            # print(emp_reg)
+            logged_in_user=request.user.username
+            emp_obj_follow=Follow.objects.filter(job_seeker=logged_in_user)
+            emp_i_follow=[]
+            for emp in emp_obj_follow:
+                emp_i_follow.append(emp.employer)
+
+            # print(emp_i_follow)
+            emp_i_should_follow=[]
+            for emp in emp_reg:
+                if emp.user.username not in emp_i_follow:
+                    emp_i_should_follow.append(emp)
+                if(len(emp_i_should_follow)>10):
+                    break;    
+            
             user_qual=QUALIFICATIONS.objects.get(user=request.user)
             param={
                 'jbasic':obj,
                 'jqual':user_qual,
+                'emp_i_should_follow':emp_i_should_follow,
             }
-            print(user_qual.profile_pic)
+            
             return render(request,'JOBSEEKER/home.html/',param)
         #if not a valid user
         except:

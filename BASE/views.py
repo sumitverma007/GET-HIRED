@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from JOBSEEKER.models import JOBSEEKER
 from EMPLOYER.models import EMPLOYER
+from .models import Follow
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
@@ -68,3 +69,18 @@ def validateusername(request):
 
           
     
+def followemployee(request):
+    if not request.user.is_authenticated:
+        return redirect("/")
+    else:
+        
+        jobseeker=request.user.username
+        employer=request.GET.get('employer')
+        job_emp_rel=Follow(job_seeker=jobseeker,employer=employer)
+        job_emp_rel.save()
+        print(jobseeker,employer)
+        data={
+            'is_ok':1
+        }
+    return JsonResponse(data)    
+        
