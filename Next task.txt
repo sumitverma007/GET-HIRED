@@ -57,3 +57,6 @@ Added Follow Model and handled follow request
 Next to do:
       1.Manage article posts based on logged in user
             
+15.01.2021
+Managed article posts based on logged in user
+     2.Design Job searching page for jobseeker

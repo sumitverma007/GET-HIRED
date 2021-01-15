@@ -38,13 +38,13 @@ body{
  
     border:1px solid black;
     border-radius: 10px;
-    background-color: #3439489e;
+    background-color: #2223279e;
 }
 .profile_img{
    
     border:1px solid #00A699;
     width:30px;
-    
+    height: 30px;
   
 }
 .content-img img{

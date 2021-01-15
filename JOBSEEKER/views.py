@@ -5,7 +5,9 @@ from EMPLOYER.models import EMPLOYER
 from django.contrib.auth.models import User
 from django.contrib import messages
 from BASE.models import Follow
+from ARTICLE.models import ARTICLE 
 from django.contrib.auth import authenticate,login,logout
+import random
 # Create your views here.
 def home(request):
     #check if user is anonymous
@@ -27,6 +29,26 @@ def home(request):
                 emp_i_follow.append(emp.employer)
 
             # print(emp_i_follow)
+            #get the recent posts of employer job seeker follow
+            recent_posts=[]
+            for emp in emp_i_follow:
+                try:
+                    p_emp=User.objects.get(username=emp)
+                    req_employer=EMPLOYER.objects.get(user=p_emp)
+                    article_by_them=ARTICLE.objects.filter(employer_name=req_employer).order_by('-article_id')[0:3]
+                    recent_posts.extend(article_by_them)
+                    
+
+
+
+                except Exception as e:
+                    print("Except part")
+                    print(e)     
+            random.shuffle(recent_posts)   
+              
+            
+
+
             emp_i_should_follow=[]
             for emp in emp_reg:
                 if emp.user.username not in emp_i_follow:
@@ -35,12 +57,15 @@ def home(request):
                     break;    
             
             user_qual=QUALIFICATIONS.objects.get(user=request.user)
+
             param={
                 'jbasic':obj,
                 'jqual':user_qual,
                 'emp_i_should_follow':emp_i_should_follow,
+                'recent_posts':recent_posts,
             }
-            
+           
+
             return render(request,'JOBSEEKER/home.html/',param)
         #if not a valid user
         except:

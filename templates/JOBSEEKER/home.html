@@ -8,26 +8,36 @@
 <div class="row mt-2 text-light">
 <div class="col-md-8 ml-1  article_content">
 <!-- one article post starts here-->
- <div class="media  p-3">
-   <strong class="d-inline-block mb-2 content-tag">World</strong>
+{% for posts in recent_posts %}
+ <div class="media  p-3 mb-2 border rounded">
+   <strong class="d-inline-block mb-2 content-tag">{{posts.tag}}</strong>
   <p>
-     <img src="/media/{{jqual.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
+     {% if posts.employer_name.profile_pic %}
+     <img src="/media/{{posts.employer_name.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
+     {% else %}
+     {% load static %}
+        <img src="{% static 'images/emp_default.png/' %}"  class="mr-3 profile_img rounded-circle">
+        {% endif %}
      <span class="content-author">
-     John Doe </span><small><i>Posted on February 19, 2016</i></small></p>
+     {{posts.employer_name.name}} </span><small><i>Posted on {{posts.time_stamp}}</i></small></p>
         <div class="media-body">
-        <p class="content-title">Duniya hai pareshan kyu??</p>
-      <p class="content-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+        <p class="content-title">{{posts.article_title}}</p>
+        <hr clas="my-2">
+      <p class="content-desc">{{posts.article_desc}}</p>    
+      {% if posts.article_media %}
       <div class="content-img mt-2 p-2">
-    {% load static %}
-       <img src="{% static 'images/byoda.jpg/' %}" alt="Image"></img>
+      
+       <img src="/media/{{posts.article_media}}" ></img>
       </div>  
+      {% endif %}
     </div>
   </div>
+  {% endfor %}
   <!-- Article post ends here -->
 </div>
 <div class="col-md-4 p-2 aside-content">
 <div class="text-center">
-<h2 style="color:#FF9900;">Follow Employers</h2>
+<h2 style="font-family: system-ui;color: #e8c2c2;">Follow Employers</h2>
 </div>
 {% for emp in emp_i_should_follow %}
 <div class="row">

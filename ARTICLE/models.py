@@ -11,4 +11,4 @@ class ARTICLE(models.Model):
     time_stamp=models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.article_id+ ' by '+self.employer_name.name
+        return "article  by "+self.employer_name.name
