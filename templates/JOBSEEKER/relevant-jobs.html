@@ -1,0 +1,64 @@
+{% extends 'basej.html' %}
+{% block title %}
+Suitable Jobs
+{% endblock title %}
+{% block jobsactive %}
+active
+{% endblock jobsactive %}
+{% block content %}
+{% if not len %}
+<h1>Not eligible for any jobs right now</h1>
+{% else %}
+<div class="container my-4">
+<table class="table text-light">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Employer</th>
+       <th scope="col">Response</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for job in jobs %}
+    <tr id="jnum-{{job.job_id}}">
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{job.job_title}}</td>
+      <td>{{job.job_desc}}</td>
+      <td>{{job.employer_name.name}}</td>
+      <td>
+      <div class="btn-group" role="group">
+      <button type="button" id="jobap-{{job.job_id}}" class="btn btn-success btn-sm">Apply</button>
+      <button type="button" id="job-{{job.job_id}}"  class="btn btn-danger btn-sm mx-2">Reject</button>
+      </div>
+      
+      </td>
+    </tr>
+    <script>
+    $("#job-{{job.job_id}}").click(function(){
+        document.getElementById("jnum-{{job.job_id}}").style.display="none";
+    });
+    $("#jobap-{{job.job_id}}").click(function(){
+        let job_id={{job.job_id}};
+        console.log(job_id);
+        $.ajax({
+            url:'/JOB/job_application/',
+            data:{
+                'job_id':job_id,
+            },
+            dataType:'Json',
+            success:function(data){
+                document.getElementById("jnum-{{job.job_id}}").style.display="none";
+            }
+        });
+
+
+    });
+    </script>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+{% endblock content %}

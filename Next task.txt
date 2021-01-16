@@ -60,3 +60,9 @@ Next to do:
 15.01.2021
 Managed article posts based on logged in user
      2.Design Job searching page for jobseeker
+
+
+16.01.2021
+Designed suitable job page where jobseeker can see the relevant jobseeker
+Next to do:
+   1 Design Follow employer page.     
