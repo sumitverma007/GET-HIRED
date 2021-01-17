@@ -6,10 +6,11 @@
 {% endblock homeactive %}active
 {% block content %}
 <div class="row mt-2 text-light">
-<div class="col-md-8 ml-1  article_content">
+{% if recent_post_cnt %}
+<div class="col-md-8 ml-1 border  article_content">
 <!-- one article post starts here-->
 {% for posts in recent_posts %}
- <div class="media  p-3 mb-2 border rounded">
+ <div class="media  p-3 mb-2 border  media_content">
    <strong class="d-inline-block mb-2 content-tag">{{posts.tag}}</strong>
   <p>
      {% if posts.employer_name.profile_pic %}
@@ -33,6 +34,11 @@
     </div>
   </div>
   {% endfor %}
+  {% else %}
+<div class="col-md-8 ml-1 border">
+ Please Follow more employee
+</div>
+  {% endif %}
   <!-- Article post ends here -->
 </div>
 <div class="col-md-4 p-2 aside-content">

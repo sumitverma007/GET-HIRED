@@ -7,6 +7,7 @@
 
 body{
     background-color: #081b31!important;
+    
 }
 .bg-dark {
     background-color: #081b31!important;
@@ -36,9 +37,14 @@ body{
 }
 .article_content{
  
-    border:1px solid black;
-    border-radius: 10px;
-    background-color: #2223279e;
+    /* border:1px solid black;
+    border-radius: 10px; */
+    /* background-color: #2223279e; */
+background-color: #010105fa;
+}
+.media_content{
+      background-color: #081b31!important;
+
 }
 .profile_img{
    
@@ -67,11 +73,16 @@ body{
     font-size: larger;
     font-weight: bolder;
 }
+.emp-follower{
+    color:#00A699;
+    font-size: 0.91rem;
+}
 .aside-content{
     
     border:1px solid black;
-    border-radius: 10px;
-    background-color: #3439489e;
+
+    /* background-color: #3439489e; */
+      background-color: #081b31!important;
 }
 .employer-name{
    font-weight: bolder;

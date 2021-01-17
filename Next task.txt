@@ -65,4 +65,10 @@ Managed article posts based on logged in user
 16.01.2021
 Designed suitable job page where jobseeker can see the relevant jobseeker
 Next to do:
-   1 Design Follow employer page.     
+   
+   1 Design Follow employer page. 
+
+17.01.2021
+Designed skeleton for Follow employer page
+Next to do:
+      1.ADD events on clicking the follow button in follow-employer page

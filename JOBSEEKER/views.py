@@ -57,12 +57,13 @@ def home(request):
                     break;    
             
             user_qual=QUALIFICATIONS.objects.get(user=request.user)
-
+            recent_post_cnt=len(recent_posts)
             param={
                 'jbasic':obj,
                 'jqual':user_qual,
                 'emp_i_should_follow':emp_i_should_follow,
                 'recent_posts':recent_posts,
+                'recent_post_cnt':recent_post_cnt,
             }
            
 
@@ -72,7 +73,7 @@ def home(request):
             # return HttpResponse("NOT vALID  JS")
             return redirect('/')
                  
-    # return HttpResponse("I am at end")
+    
 
 def registerjobseeker(request):
     if request.method=='POST':
@@ -119,3 +120,43 @@ def registerjobseeker(request):
         return HttpResponse("Will register job seeker data")
     else:
         return redirect('/handlesignup/')        
+
+def follow_employee(request):
+    # if an anoynmous barged in
+    if not request.user.is_authenticated:
+        return redirect('/')
+    #valid barged in
+    try:
+        logged_in=request.user
+        
+        jobseeker=JOBSEEKER.objects.get(user=logged_in)
+        logged_in_user=logged_in.username
+        
+        emp_reg=EMPLOYER.objects.all()
+        emp_obj_follow=Follow.objects.filter(job_seeker=logged_in_user)
+        emp_i_follow=[]
+        for emp in emp_obj_follow:
+            emp_i_follow.append(emp.employer)
+
+        emp_i_should_follow=[]
+        for emp in emp_reg:
+                if emp.user.username not in emp_i_follow:
+                    followers=Follow.objects.filter(employer=emp.user.username)
+                    follower_len=len(followers)
+                    emp_i_should_follow.append([emp,follower_len])
+
+        print(emp_i_should_follow)        
+        param={
+            'employees':emp_i_should_follow
+        }
+
+        
+
+
+        return render(request,"JOBSEEKER/follow-employee.html/",param)
+    except Exception as e:
+        print(e)
+        return redirect('/')    
+        
+     
+    return render(request,"JOBSEEKER/follow-employee.html/")
