@@ -72,3 +72,11 @@ Next to do:
 Designed skeleton for Follow employer page
 Next to do:
       1.ADD events on clicking the follow button in follow-employer page
+
+
+18.01.2021
+managed follow-employer page
+************************************************  From Employer POV ***************************************
+
+next to do:
+      1.Design employer base template

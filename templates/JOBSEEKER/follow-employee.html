@@ -8,8 +8,9 @@ active
 {% block content %}
 
  {% for emp in employees%}
-<div class="container border my-2 text-white">
-  <h2>
+<div class="container border my-2 text-white" id="emp-block-{{emp.0.user.username}}">
+  <h2  style="color: #cad6ec;
+    font-family: -webkit-pictograph;">
   {% if emp.0.profile_pic %}
   <img src="/media/{{emp.0.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
      {% else %}
@@ -24,9 +25,26 @@ active
   <p>About</p>
   <hr class="my-2">
   <div class="text-center">
-  <button class="btn btn-success  my-1">Follow</button>
+  <button class="btn btn-success  my-1" id="emp-{{emp.0.user.username}}" value="{{emp.0.user.username}}">Follow</button>
   </div>
 </div>
+<script>
+$("#emp-{{emp.0.user.username}}").click(function(){
+let employer=$(this).val();
+$.ajax({
+   url:'/follow-employee/',
+   data:{
+     'employer':employer
+   },
+   dataType:'Json',
+   success:function(data){
+       document.getElementById("emp-block-{{emp.0.user.username}}").style.display="none";
+  
+   }
+
+});
+});
+</script>
  {% endfor %}
 
 

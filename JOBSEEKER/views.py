@@ -145,7 +145,7 @@ def follow_employee(request):
                     follower_len=len(followers)
                     emp_i_should_follow.append([emp,follower_len])
 
-        print(emp_i_should_follow)        
+            
         param={
             'employees':emp_i_should_follow
         }
