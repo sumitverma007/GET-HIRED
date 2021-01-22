@@ -1,5 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import EMPLOYER
+from ARTICLE.models import ARTICLE
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.core.files.storage import FileSystemStorage
@@ -15,9 +16,17 @@ def home(request):
         #check if  a valid employer
         try:
             user=EMPLOYER.objects.get(user=request.user)
-            print("Valid Employer")
-            #design Home page for Employer
-            return HttpResponse("Valid Employer")
+            # print("Valid Employer")
+            try:
+
+                posts=ARTICLE.objects.filter(employer_name=user).order_by('-article_id')
+                # print(posts)
+                param={
+                    'posts':posts,
+                }
+                return render(request,'EMPLOYER/home.html/',param)
+            except:    
+                return render(request,'EMPLOYER/home.html/')
         except:
             print("Not a valid Employer")
             return redirect('/')    

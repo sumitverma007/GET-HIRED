@@ -87,6 +87,30 @@ background-color: #010105fa;
 .employer-name{
    font-weight: bolder;
 }
+.container-employer{
+    background-color: rgb(207, 216, 226);
+    border:black;
+    border-radius:5px;
+    border-left:2px solid black;
+    border-right:2px solid  black;
+}
+.line-away{
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 2px solid rgb(252, 252, 252); 
+    line-height: 0.1em;
+    margin-top:26px;
+    margin-bottom: 26px;
+}
+.line-away span{
+    background:#fff; 
+    padding:0 10px; 
+    border-radius: 12px;
+}
+.delete-post a:hover{
+    background-color: red;
+    color:white;
+}
 @media screen and (max-width: 600px) {
  .aside-content{
      display: none;

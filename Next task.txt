@@ -80,3 +80,9 @@ managed follow-employer page
 
 next to do:
       1.Design employer base template
+
+22.01.2021 
+Designed employer base tempalate and template for employer home
+Next to do:
+      1.Manage articles  Published by employer ,throw an error in case of wrong inputs using message framework ,finally save relevant article 
+      2.Manage Delete Button for articles       

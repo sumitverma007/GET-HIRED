@@ -1,0 +1,80 @@
+{% extends 'baseE.html' %}
+{% block title  %}Home
+{% endblock title  %}
+{% block content %}
+<div class="container container-employer p-2 mb-2">
+<h2 class="text-center " style="
+    font-size: x-large;">Publish  Post</h2>
+<hr class="my-2">
+<form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
+     <div class="mb-3">
+            <label for="article_tag" class="form-label">Enter relevant Tag<span style="color:red;">*</span></label>
+            <input type="text" class="form-control" id="article_tag" name="article_tag" placeholder="relevant tags" aria-describedby="tag_helper" required></input>
+            <div id="tag_helper" class="form-text">Tag represent the relevancy of your article .For example <i>Job preparation ,Advice </i></div>
+        </div>
+        <div class="mb-3">
+        <label for="article_title" class="form-label">Enter Title<span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="article_title" name="article_title" placeholder="title for your article" required></input>
+        </div>
+        <div class="mb-3">
+        <label for="article_desc" class="formm-label">Enter Details(if any):</label>
+        <textarea class="form-control" name="article_desc" id="article_desc"></textarea>
+        </div>
+         <div class="mb-3">
+        <label for="article_image" class="form-label">Upload image(if any):</label>
+        <input type="file" id="article_image" name="article_image" class="form-control"></input>
+        </div>
+        <hr class ="my-4">
+          <div class="mb-3 text-center">
+         <button class="btn btn-success" type="submit">Publish Post</button>
+        </div>
+
+
+</form>
+</div>
+
+<h4 class="line-away "><span>Recent Posts</span></h4>
+<div class="container article_content text-light">
+    {% for post in posts %}
+ <div class="media  p-3 mb-2 border  media_content">
+   <strong class="d-inline-block mb-2 content-tag">{{post.tag}}</strong>
+  <p>
+     {% if post.employer_name.profile_pic %}
+     <img src="/media/{{post.employer_name.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
+     {% else %}
+     {% load static %}
+        <img src="{% static 'images/emp_default.png/' %}"  class="mr-3 profile_img rounded-circle">
+        {% endif %}
+     <span class="content-author">
+     {{post.employer_name.name}} </span><small><i>Posted on {{post.time_stamp}}</i> 
+     </small> 
+</p>
+ <div class="dropdown my-2">
+  <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton-post-{{post.article_id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<i class="fa fa-cogs"></i> Choose Action
+  </button>
+  <div class="dropdown-menu delete-post" aria-labelledby="dropdownMenuButton-post-{{post.article_id}}">
+   
+    <a class="dropdown-item" href="#">Delete Post</a>
+  </div>
+</div> 
+
+        <div class="media-body">
+        <p class="content-title">{{post.article_title}}</p>
+        <hr clas="my-2">
+      <p class="content-desc">{{post.article_desc}}</p>    
+      {% if post.article_media %}
+      <div class="content-img mt-2 p-2">
+      
+       <img src="/media/{{post.article_media}}" ></img>
+      </div>  
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+
+</div>
+
+
+{% endblock content %}
