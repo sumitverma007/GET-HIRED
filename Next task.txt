@@ -86,3 +86,11 @@ Designed employer base tempalate and template for employer home
 Next to do:
       1.Manage articles  Published by employer ,throw an error in case of wrong inputs using message framework ,finally save relevant article 
       2.Manage Delete Button for articles       
+
+
+23.01.2021
+Managed articles published by employer,Managed delete Button for article,designed my-job page page for employer
+
+Next to do:
+      1.Manage delete job function ...deleting a job should delete all its applicants as well
+      2.Manage publish-job page

@@ -1,0 +1,100 @@
+{% extends 'baseE.html' %}
+{% block title %}
+JOBS
+{% endblock title %}
+{% block jobsactive %}
+active{% endblock jobsactive %}
+{% block content %}
+ {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+   {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+
+<div class="container container-employer p-2 mb-2">
+<h2 class="text-center " style="
+    font-size: x-large;">Publish  Post</h2>
+<hr class="my-2">
+<form action="#" method="POST">{% csrf_token %}
+     <div class="mb-3">
+            <label for="job_title" class="form-label"> Enter Job Position<span style="color:red;">*</span></label>
+            <input type="text" class="form-control" id="job_title" name="job_title" placeholder="enter relevant job title" aria-describedby="tag_helper" required></input>
+            <div id="tag_helper" class="form-text">relevant title ,for example <i>SDE,Cloud Engineer etc </i></div>
+        </div>
+      <div class="mb-3">
+      <label for="job_desc" class="form-label">Enter Additional Information about job position<span style="color:red";>*</span></label>
+      <textarea class="form-control" name="job_desc" id="job_desc"></textarea>
+      </div>
+    
+   <div class="mb-3 row">
+  
+   <div class="col-sm-4">
+   <label for ="x_req" class="form-label">10th requirement(in %)<span style="color:red;">*</span></label>
+   <input type="number" class="form-control" id="x_req" name="x_req" placeholder="class X req" required></input>
+   </div>
+   <div class="col-sm-4">
+    <label for ="xii_req" class="form-label">12th requirement(in %)<span style="color:red;">*</span></label>
+   <input type="number" class="form-control" id="xii_req" name="xii_req" placeholder="class 12 req" required></input>
+   </div>
+   <div class="col-sm-4">
+    <label for ="grad_req" class="form-label">Graduation requirement(in %)<span style="color:red;">*</span></label>
+   <input type="number" class="form-control" id="grad_req" name="grad_req" placeholder="Graduation req" required></input>
+   </div>
+   </div>
+   <hr class ="my-4">
+          <div class="mb-3 text-center">
+         <button class="btn btn-success" type="submit">Publish JOB</button>
+        </div>
+
+
+</form>
+</div>
+
+<h4 class="line-away "><span>Recent Jobs</span></h4>
+
+<div class="container my-4">
+<table class="table text-light">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+       <th scope="col">Response</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for job in jobs %}
+    <tr id="jnum-{{job.job_id}}">
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{job.job_title}}</td>
+      <td>{{job.job_desc}}</td>
+    
+      <td>
+    
+      <button type="button" id="delete-job-{{job.job_id}}" class="btn btn-danger btn-sm">Delete job</button>
+      <script>
+      $("#delete-job-{{job.job_id}}").click(function(){
+     
+          if(confirm("Warning! Deleting a job Will delete all the jobseekers application of this job as well! Are you sure?")){
+              console.log("Fine will delete it");
+          }
+          else{
+              console.log("Not Bad");
+          }
+      });
+      </script>
+     
+      
+      </td>
+       </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+
+{% endblock content %}

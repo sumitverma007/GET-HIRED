@@ -6,4 +6,7 @@ from . import views
 urlpatterns = [
     path('home/',views.home,name="home"),
     path('registeremployer/',views.registeremployer,name="register employer"),
+    path('publish-post/',views.publishpost,name="publish post"),
+    path('my-jobs/',views.myjobs,name="my jobs"),
+    path('delete-article/article/<int:id>/',views.deletepost,name="delete_post"),
 ]
