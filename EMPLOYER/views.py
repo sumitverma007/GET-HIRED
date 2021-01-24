@@ -189,9 +189,9 @@ def deletejob(request):
         job_id=request.POST.get('job-id')
         try:
             job_to_delete=JOB.objects.get(job_id=job_id)
-            job_applications=JOB_APPLICATIONS.objects.filter(job_id=job_id)
-            for application in job_applications:
-                application.delete()
+            # job_applications=JOB_APPLICATIONS.objects.filter(job_id=job_id)
+            # for application in job_applications:
+            #     application.delete()
             job_to_delete.delete()
 
             messages.success(request,"Job deleted Successfully")

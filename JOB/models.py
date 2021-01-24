@@ -1,5 +1,6 @@
 from django.db import models
 from EMPLOYER.models import EMPLOYER
+from JOBSEEKER.models import JOBSEEKER
 # Create your models here.
 
 class JOB(models.Model):
@@ -21,5 +22,10 @@ class JOB_APPLICATIONS(models.Model):
     job_id=models.IntegerField()
 
     def __str__(self):
-        return self.jobseeker_username         
+        return self.jobseeker_username     
+
+
+class APPLICATIONS(models.Model):
+    applicant=models.ForeignKey(JOBSEEKER,on_delete=models.CASCADE)
+    applicant_job=models.ForeignKey(JOB,on_delete=models.CASCADE)            
 
