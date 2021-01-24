@@ -1,11 +1,12 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import EMPLOYER
 from ARTICLE.models import ARTICLE
-from JOB.models import JOB
+from JOB.models import JOB,JOB_APPLICATIONS
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
+from django.http import JsonResponse
 # Create your views here.
 def home(request):
     # print(request.user)
@@ -156,5 +157,54 @@ def myjobs(request):
         except:
             return redirect('/')
 
+    else:
+        return redirect('/')    
+
+
+def publishjobs(request):
+    if request.method=='POST':
+        employer=EMPLOYER.objects.get(user=request.user)
+        job_title=request.POST.get('job_title')
+        job_desc=request.POST.get('job_desc')
+        x_req=request.POST.get('x_req')
+        xii_req=request.POST.get('xii_req')
+        grad_req=request.POST.get('grad_req')
+        try:
+            new_job=JOB(job_title=job_title,job_desc=job_desc,x_req=x_req,xii_req=xii_req,grad_req=grad_req,employer_name=employer)
+            new_job.save()
+            messages.success(request,"job published Successfully")
+            return redirect('/EMPLOYER/my-jobs/')
+        except:
+            messages.error(request,"Failed to publish job.")
+            return redirect('/EMPLOYER/my-jobs/')    
+    
+
+    else:
+        return redirect('/')         
+
+
+
+def deletejob(request):
+    if request.method=='POST':
+        job_id=request.POST.get('job-id')
+        try:
+            job_to_delete=JOB.objects.get(job_id=job_id)
+            job_applications=JOB_APPLICATIONS.objects.filter(job_id=job_id)
+            for application in job_applications:
+                application.delete()
+            job_to_delete.delete()
+
+            messages.success(request,"Job deleted Successfully")
+
+            data={
+                'is_ok':1,
+            }    
+            return JsonResponse(data)
+        except:
+            data={
+                'is_ok':0,
+            }
+            messages.error(request,"Failed to delete job")
+            return JsonResponse(data)
     else:
         return redirect('/')    

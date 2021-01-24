@@ -94,3 +94,10 @@ Managed articles published by employer,Managed delete Button for article,designe
 Next to do:
       1.Manage delete job function ...deleting a job should delete all its applicants as well
       2.Manage publish-job page
+
+24.01.2021
+Managed Delete job function and job applications,managed publish-job function
+
+Next to do:
+      1.Manage candidates applied page 
+        >>idea<< group candidates by job_id 

@@ -6,8 +6,8 @@ JOBS
 active{% endblock jobsactive %}
 {% block content %}
  {% for message in messages %}
-  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-   {{message}}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"><strong>
+   {{message}}</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endfor %}
@@ -17,7 +17,7 @@ active{% endblock jobsactive %}
 <h2 class="text-center " style="
     font-size: x-large;">Publish  Post</h2>
 <hr class="my-2">
-<form action="#" method="POST">{% csrf_token %}
+<form action="/EMPLOYER/publish-jobs/" method="POST">{% csrf_token %}
      <div class="mb-3">
             <label for="job_title" class="form-label"> Enter Job Position<span style="color:red;">*</span></label>
             <input type="text" class="form-control" id="job_title" name="job_title" placeholder="enter relevant job title" aria-describedby="tag_helper" required></input>
@@ -32,15 +32,15 @@ active{% endblock jobsactive %}
   
    <div class="col-sm-4">
    <label for ="x_req" class="form-label">10th requirement(in %)<span style="color:red;">*</span></label>
-   <input type="number" class="form-control" id="x_req" name="x_req" placeholder="class X req" required></input>
+   <input type="number" class="form-control" min="0" max="100" value="0" step="0.01" id="x_req" name="x_req" placeholder="class X req" required></input>
    </div>
    <div class="col-sm-4">
     <label for ="xii_req" class="form-label">12th requirement(in %)<span style="color:red;">*</span></label>
-   <input type="number" class="form-control" id="xii_req" name="xii_req" placeholder="class 12 req" required></input>
+   <input type="number" class="form-control" id="xii_req" min="0" max="100" value="0" step="0.01" name="xii_req" placeholder="class 12 req" required></input>
    </div>
    <div class="col-sm-4">
     <label for ="grad_req" class="form-label">Graduation requirement(in %)<span style="color:red;">*</span></label>
-   <input type="number" class="form-control" id="grad_req" name="grad_req" placeholder="Graduation req" required></input>
+   <input type="number" class="form-control" id="grad_req" min="0" max="100" value="0" step="0.01" name="grad_req" placeholder="Graduation req" required></input>
    </div>
    </div>
    <hr class ="my-4">
@@ -72,13 +72,36 @@ active{% endblock jobsactive %}
       <td>{{job.job_desc}}</td>
     
       <td>
-    
+      
       <button type="button" id="delete-job-{{job.job_id}}" class="btn btn-danger btn-sm">Delete job</button>
+       
+      </td>
+       </tr>
       <script>
       $("#delete-job-{{job.job_id}}").click(function(){
      
           if(confirm("Warning! Deleting a job Will delete all the jobseekers application of this job as well! Are you sure?")){
-              console.log("Fine will delete it");
+             let job_id={{job.job_id}};
+             $.ajax({
+               type:'POST',
+               url:'/EMPLOYER/delete-job/',
+               data:{
+                 'job-id':job_id,
+                  'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken').val(),
+               },
+            
+               dataType:'json',
+               
+               success:function(data){
+                if(data.is_ok){
+                  document.getElementById('jnum-{{job.job_id}}').style.display="none";
+                }
+                else{
+                  alert("Ahh snap some error has occured");
+                }
+               }
+             });
+
           }
           else{
               console.log("Not Bad");
@@ -86,9 +109,7 @@ active{% endblock jobsactive %}
       });
       </script>
      
-      
-      </td>
-       </tr>
+     
 
     {% endfor %}
   </tbody>

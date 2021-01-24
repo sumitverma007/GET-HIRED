@@ -8,5 +8,7 @@ urlpatterns = [
     path('registeremployer/',views.registeremployer,name="register employer"),
     path('publish-post/',views.publishpost,name="publish post"),
     path('my-jobs/',views.myjobs,name="my jobs"),
+    path('publish-jobs/',views.publishjobs,name="publish job"),
+    path('delete-job/',views.deletejob,name="delete-job"),
     path('delete-article/article/<int:id>/',views.deletepost,name="delete_post"),
 ]
