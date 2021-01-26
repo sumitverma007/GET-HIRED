@@ -1,0 +1,46 @@
+{% extends 'baseE.html' %}
+{% block title %}
+Applications
+{% endblock title %}
+{% block msgactive %}
+active
+{% endblock msgactive %}
+{% block content %}
+<div class="container text-light">
+{% for application in applications %}
+
+  <table class="table mb-4 text-light text-center">
+  <thead class="text-warning">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Applicant name</th>
+      <th scope="col">JOB Position</th>
+      <th scope="col">Response</th>
+    </tr>
+  </thead>
+ 
+{% for applicant in application %}
+<tbody>
+ 
+    <tr >
+      <th scope="row">{{forloop.counter}}</th>
+      <td><a style='text-decoration:none;color:white;' href="#">{{applicant.applicant.first_name|title}} {{applicant.applicant.last_name|title}} <i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
+      <td>{{applicant.applicant_job.job_title|title}}</td>
+      <td>
+     <a style='color:lightgreen;' href="#">Click to response</a>
+      
+      </td>
+    </tr>
+    
+
+
+{% endfor %}
+  </tbody>
+</table>
+
+{% endfor %}
+
+
+</div>
+
+{% endblock content %}

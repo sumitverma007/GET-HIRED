@@ -101,3 +101,8 @@ Managed Delete job function and job applications,managed publish-job function
 Next to do:
       1.Manage candidates applied page 
         >>idea<< group candidates by job_id 
+
+26.01.2021
+Designed Applied-page 
+Next to do:
+      1.Handle application response..move application to shortlisted or rejected along with message from employer to jobseekeer

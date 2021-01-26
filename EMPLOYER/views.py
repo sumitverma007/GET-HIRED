@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import EMPLOYER
 from ARTICLE.models import ARTICLE
-from JOB.models import JOB,JOB_APPLICATIONS
+from JOB.models import JOB,JOB_APPLICATIONS,APPLICATIONS
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.core.files.storage import FileSystemStorage
@@ -33,7 +33,6 @@ def home(request):
             print("Not a valid Employer")
             return redirect('/')    
 
-
 def registeremployer(request):
     if request.method=='POST':
         username=request.POST.get('eUsername')
@@ -62,9 +61,6 @@ def registeremployer(request):
         
     else:
         return redirect('/handlesignup/')    
-
-
-
 
 def publishpost(request):
     if request.method == 'POST':
@@ -105,9 +101,6 @@ def publishpost(request):
     else:
         return redirect('/')    
     
-
-
-
 def deletepost(request,id):
     #check if user is authenticated 
     if request.user.is_authenticated:
@@ -135,10 +128,6 @@ def deletepost(request,id):
     else:
         return redirect('/')    
         
-
-
-
-
 def myjobs(request):
     # user is authenticated or not
     if request.user.is_authenticated:
@@ -160,7 +149,6 @@ def myjobs(request):
     else:
         return redirect('/')    
 
-
 def publishjobs(request):
     if request.method=='POST':
         employer=EMPLOYER.objects.get(user=request.user)
@@ -181,8 +169,6 @@ def publishjobs(request):
 
     else:
         return redirect('/')         
-
-
 
 def deletejob(request):
     if request.method=='POST':
@@ -208,3 +194,35 @@ def deletejob(request):
             return JsonResponse(data)
     else:
         return redirect('/')    
+
+
+
+def candidateapplied(request):
+    if request.user.is_authenticated:
+        #valid employer
+        try:
+            employer=EMPLOYER.objects.get(user=request.user)
+            all_jobs=JOB.objects.filter(employer_name=employer)
+            applications=[]
+            # print(all_jobs)
+            for job in all_jobs:
+                applied=APPLICATIONS.objects.filter(applicant_job=job)
+                if len(applied)>0:
+                    applications.append(applied)
+         
+            
+            param={
+                'applications':applications,
+            }
+            
+            
+
+            return render(request,'EMPLOYER/applicants.html/',param)
+          
+        except Exception as e:
+            #not valid employer
+            print(e)
+            return redirect('/')    
+    else:
+
+        return redirect('/')
