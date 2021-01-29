@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
+from JOBSEEKER.models import JOBSEEKER,QUALIFICATIONS
 from django.http import JsonResponse
 # Create your views here.
 def home(request):
@@ -226,3 +227,46 @@ def candidateapplied(request):
     else:
 
         return redirect('/')
+
+
+def receiveresponse(request,slug,id):
+    # print(slug,id)
+    if not request.user.is_authenticated:
+        return redirect('/')
+    else:
+        # logged in 
+        # check if jobseeker is here
+        try:
+            employer=EMPLOYER.objects.get(user=request.user)
+            try:
+                #check application
+                applicant_user=User.objects.get(username=slug)
+                qualification=QUALIFICATIONS.objects.get(user=applicant_user)
+                applicant=JOBSEEKER.objects.get(user=applicant_user)
+                
+                job=JOB.objects.get(job_id=id)
+                
+                application=APPLICATIONS.objects.get(applicant=applicant,applicant_job=job)
+                # check if job's employer is the one logged in 
+                if job.employer_name==employer:
+                    param={
+                        'application':application,
+                        'qualification':qualification,
+                    }
+                    return render(request,'EMPLOYER/send-response.html/',param)
+                 
+                else:
+                    return redirect('/')
+                  
+
+
+
+                return HttpResponse("Valid application")
+            except Exception as e:
+                print(e)
+                return redirect('/')    
+        except Exception as e:
+            print(e)
+            return redirect('/')        
+
+    return HttpResponse("Ohoy scoop")        

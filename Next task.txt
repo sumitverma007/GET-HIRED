@@ -106,3 +106,8 @@ Next to do:
 Designed Applied-page 
 Next to do:
       1.Handle application response..move application to shortlisted or rejected along with message from employer to jobseekeer
+
+29.01.2021
+Designed template for "application response page"
+Next to do:
+      1.Handle application response..move application to shortlisted or rejected along with message from employer to jobseekeer

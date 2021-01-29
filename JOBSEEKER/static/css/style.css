@@ -112,6 +112,13 @@ background-color: #010105fa;
     background-color: red;
     color:white;
 }
+.user-img{
+    border:1px solid white;
+    height: 191px;
+    width: 191px;
+    border-radius: 6px;
+    margin-top: 6px;
+}
 @media screen and (max-width: 600px) {
  .aside-content{
      display: none;

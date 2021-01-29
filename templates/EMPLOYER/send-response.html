@@ -1,0 +1,64 @@
+{% extends 'baseE.html' %}
+{% block title %}
+Response
+{% endblock title %}
+{% block content %}
+<div class="container-fluid text-light">
+<div class="row">
+<div class="col col-md-3 text-center">
+
+
+<div class="card" style="width: 15rem;">
+{% if qualification.profile_pic %}
+   <img class="card-img-top" src="/media/{{qualification.profile_pic}}" alt="img" >
+{% else %}
+  {% load static %}
+        <img  class="card-img-top" src="{% static 'images/emp_default.png/' %}">
+{% endif %}
+
+  <div class="card-body">
+    <h5 class="card-title" style="color:green"><i class="fa fa-user-o" aria-hidden="true"></i> {{application.applicant.first_name}} {{application.applicant.last_name}}</h5>
+    <h6 class="card-title" style="color:green"><i class="fa fa-mobile" aria-hidden="true"></i> +91-{{application.applicant.phone}}</h6>
+    <p class="card-text" style="font-size:15px;"><a class="text-success" href="mailto:{{application.applicant.email}}"><i class="fa fa-envelope-o" aria-hidden="true"></i> {{application.applicant.email}}</a></p>
+
+
+  </div>
+</div>
+
+</div>
+
+<div class="col col-md-9">
+<h2 class="card-title my-2">Qualifications</h2>
+<div class="x_progress">
+Class 10 marks(in %):
+<div class="progress my-2">
+  <div class="progress-bar bg-success" role="progressbar" style="width: {{qualification.x_marks}}%;" aria-valuenow="{{qualification.x_marks}}" aria-valuemin="0" aria-valuemax="100">{{qualification.x_marks}}%</div>
+</div>
+  </div>
+
+
+<div class="xii_progress">
+Class 12 marks(in %):
+<div class="progress my-2">
+  <div class="progress-bar bg-success" role="progressbar" style="width: {{qualification.xii_marks}}%;" aria-valuenow="{{qualification.xii_marks}}" aria-valuemin="0" aria-valuemax="100">{{qualification.xii_marks}}%</div>
+</div>
+  </div>
+
+
+<div class="grad_progress">
+Graduation Grade(in %):
+<div class="progress my-2">
+  <div class="progress-bar bg-success" role="progressbar" style="width: {{qualification.grad_marks}}%;" aria-valuenow="{{qualification.grad_marks}}" aria-valuemin="0" aria-valuemax="100">{{qualification.grad_marks}}%</div>
+</div>
+  </div>
+
+
+</div>
+
+</div>
+</div>
+
+
+<h4 class="line-away "><span>Enter Response</span></h4>
+
+{% endblock content %}
