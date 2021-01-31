@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import EMPLOYER
 from ARTICLE.models import ARTICLE
-from JOB.models import JOB,JOB_APPLICATIONS,APPLICATIONS
+from JOB.models import JOB,JOB_APPLICATIONS,APPLICATIONS,SHORTLISTED
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.core.files.storage import FileSystemStorage
@@ -270,3 +270,49 @@ def receiveresponse(request,slug,id):
             return redirect('/')        
 
     return HttpResponse("Ohoy scoop")        
+
+
+def acceptuser(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        job_id=request.POST.get('job_id')
+        msg=request.POST.get('msg')
+        applicant_user=User.objects.get(username=username)
+        applicant=JOBSEEKER.objects.get(user=applicant_user)
+        job=JOB.objects.get(job_id=job_id)
+        application=APPLICATIONS.objects.get(applicant=applicant,applicant_job=job)
+        recruit=SHORTLISTED(applicant=applicant,applicant_job=job,message=msg)
+        recruit.save()
+        application.delete()
+        data={
+            'is_ok':1,
+        }
+        return JsonResponse(data)
+
+    else:
+        return redirect('/')    
+
+         
+
+
+def rejectuser(request):
+    if request.method == 'POST':
+        username=request.POST.get('username')
+        job_id=request.POST.get('job_id')
+        msg=request.POST.get('msg')
+        applicant_user=User.objects.get(username=username)
+        applicant=JOBSEEKER.objects.get(user=applicant_user)
+        job=JOB.objects.get(job_id=job_id)
+        application=APPLICATIONS.objects.get(applicant=applicant,applicant_job=job)
+        
+        
+        application.delete()
+        data={
+            'is_ok':1,
+        }
+        return JsonResponse(data)
+              
+        
+
+    else:
+        return redirect('/')             

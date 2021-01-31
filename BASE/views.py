@@ -78,7 +78,7 @@ def followemployee(request):
         employer=request.GET.get('employer')
         job_emp_rel=Follow(job_seeker=jobseeker,employer=employer)
         job_emp_rel.save()
-        print(jobseeker,employer)
+        # print(jobseeker,employer)
         data={
             'is_ok':1
         }

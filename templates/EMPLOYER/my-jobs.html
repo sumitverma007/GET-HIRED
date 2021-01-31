@@ -87,7 +87,7 @@ active{% endblock jobsactive %}
                url:'/EMPLOYER/delete-job/',
                data:{
                  'job-id':job_id,
-                  'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken').val(),
+                  'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
                },
             
                dataType:'json',

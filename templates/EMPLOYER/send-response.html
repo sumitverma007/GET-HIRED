@@ -17,7 +17,7 @@ Response
 {% endif %}
 
   <div class="card-body">
-    <h5 class="card-title" style="color:green"><i class="fa fa-user-o" aria-hidden="true"></i> {{application.applicant.first_name}} {{application.applicant.last_name}}</h5>
+    <h5 class="card-title" style="color:green"><i class="fa fa-user-o" aria-hidden="true"></i> {{application.applicant.first_name|title}} {{application.applicant.last_name}}</h5>
     <h6 class="card-title" style="color:green"><i class="fa fa-mobile" aria-hidden="true"></i> +91-{{application.applicant.phone}}</h6>
     <p class="card-text" style="font-size:15px;"><a class="text-success" href="mailto:{{application.applicant.email}}"><i class="fa fa-envelope-o" aria-hidden="true"></i> {{application.applicant.email}}</a></p>
 
@@ -60,5 +60,63 @@ Graduation Grade(in %):
 
 
 <h4 class="line-away "><span>Enter Response</span></h4>
+<div class="container text-light">
+<div class="mb-3 form-group">
+<label for="response-area" class="form-label">Enter Response:</label>
+<textarea class="form-control" id="response-area"  rows="8" required></textarea>
+</div>
+<div class="text-center">
+<form>{% csrf_token %}
+<button type="button" id="accept-user" class="btn btn-success btn-lg">Accept</button>
+<button type="button" id="reject-user" class="btn btn-danger btn-lg">Reject</button>
+</form>
+</div>
+<script>
+$("#accept-user").click(function(){
+let username="{{application.applicant.user.username}}";
+let jobid={{application.applicant_job.job_id}};
+let msg=$('#response-area').val();
 
+
+$.ajax({
+ type:'POST',
+ url:"/EMPLOYER/accept-user/",
+ data:{
+   'username':username,
+   'job_id':jobid,
+   'msg':msg,
+   'csrfmiddlewaretoken':$("input[name='csrfmiddlewaretoken']").val(),
+ },
+ dataType:'json',
+ success:function(data){
+   window.location.href='/EMPLOYER/applied-candidate/';
+ }
+});
+});
+
+$("#reject-user").click(function(){
+let username="{{application.applicant.user.username}}";
+let jobid={{application.applicant_job.job_id}};
+let msg=$('#response-area').val();
+ 
+  $.ajax({
+      type:'POST',
+      url:'/EMPLOYER/reject-user/',
+      data:{
+        'username':username,
+        'job_id':jobid,
+        'msg':msg,
+        'csrfmiddlewaretoken':$("input[name='csrfmiddlewaretoken']").val(),
+      },
+      dataType:'json',
+      success:function(data){
+          window.location.href="/EMPLOYER/applied-candidate/";
+      }
+  });
+
+});
+</script>
+
+</div>
+<hr class="my-4">
 {% endblock content %}

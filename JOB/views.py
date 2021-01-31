@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from JOBSEEKER.models import JOBSEEKER,QUALIFICATIONS
 from EMPLOYER.models import EMPLOYER
 from django.contrib.auth.models import User
-from .models import JOB,JOB_APPLICATIONS,APPLICATIONS
+from .models import JOB,JOB_APPLICATIONS,APPLICATIONS,SHORTLISTED
 from django.http import JsonResponse
 # Create your views here.
 def relevant_jobs(request):
@@ -20,10 +20,12 @@ def relevant_jobs(request):
             jobseeker=JOBSEEKER.objects.get(user=request.user)
             all_jobs=JOB.objects.all()
             jobs_applied=APPLICATIONS.objects.filter(applicant=jobseeker)
+            jobs_shortlisted=SHORTLISTED.objects.filter(applicant=jobseeker)
             my_jobs=[]
             for job in jobs_applied:
                 my_jobs.append(job.applicant_job)
-            
+            for job in jobs_shortlisted:
+                my_jobs.append(job.applicant_job)
             qualification=QUALIFICATIONS.objects.get(user=request.user)
             valid_job=[]
             for job in all_jobs:

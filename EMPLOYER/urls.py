@@ -11,6 +11,8 @@ urlpatterns = [
     path('publish-jobs/',views.publishjobs,name="publish job"),
     path('delete-job/',views.deletejob,name="delete-job"),
     path('applied-candidate/',views.candidateapplied,name="candidates application"),
+    path('accept-user/',views.acceptuser,name="shortlist"),
+    path('reject-user/',views.rejectuser,name="rejectuser"),
     path('receive-response/<str:slug>/<int:id>/',views.receiveresponse,name="receive response"),
     path('delete-article/article/<int:id>/',views.deletepost,name="delete_post"),
 ]

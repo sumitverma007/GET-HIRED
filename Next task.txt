@@ -111,3 +111,9 @@ Next to do:
 Designed template for "application response page"
 Next to do:
       1.Handle application response..move application to shortlisted or rejected along with message from employer to jobseekeer
+
+
+31.01.2021
+Handled application response,and completed previous plan ... A new Model --- SHORTLISTED has been created 
+Next to do:
+      Design Shortlisted page of employee
