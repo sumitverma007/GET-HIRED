@@ -117,3 +117,9 @@ Next to do:
 Handled application response,and completed previous plan ... A new Model --- SHORTLISTED has been created 
 Next to do:
       Design Shortlisted page of employee
+
+
+03.02.2021
+Designed Shortlisted page
+Next to do:
+      Design message notification from jobseeker pov

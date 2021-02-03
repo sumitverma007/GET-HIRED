@@ -316,3 +316,59 @@ def rejectuser(request):
 
     else:
         return redirect('/')             
+
+
+
+def candidateshortlisted(request):
+    if request.user.is_authenticated:
+        #valid employer
+        try:
+            employer=EMPLOYER.objects.get(user=request.user)
+            all_jobs=JOB.objects.filter(employer_name=employer)
+            applications=[]
+            for job in all_jobs:
+                applied=SHORTLISTED.objects.filter(applicant_job=job)
+                if len(applied)>0:
+                    applications.append(applied)
+
+            param={
+                'applications':applications,
+            }        
+            return render(request,'EMPLOYER/shortlisted-candidates.html/',param)
+
+        except:
+            return redirect('/')    
+        
+    else:
+        return redirect('/')    
+
+
+
+def releaseuser(request):
+    if request.user.is_authenticated:
+        #if a valid employer
+        try:
+            employer=EMPLOYER.objects.get(user=request.user)
+            #employer
+            username=request.POST.get('username')
+            job_id=request.POST.get('job_id')
+            juser=User.objects.get(username=username)
+            jobseeker=JOBSEEKER.objects.get(user=juser)
+            job=JOB.objects.get(job_id=job_id)
+            application=SHORTLISTED.objects.get(applicant=jobseeker,applicant_job=job)
+            application.delete()
+            data={
+                'ok':1,
+            }
+            return JsonResponse(data)
+
+        except Exception as e:
+            print(e)
+            return redirect('/')    
+        
+
+
+     
+
+    else:
+        return redirect('/')    

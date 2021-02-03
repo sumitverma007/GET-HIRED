@@ -1,0 +1,69 @@
+{% extends 'baseE.html' %}
+{% block title %}
+Shortlisted Candidate
+{% endblock title %}
+{% block empactive %}
+active
+{% endblock empactive %}
+{% block content %}
+
+<div class="container text-light">
+{% for application in applications %}
+
+  <table class="table mb-4 text-light text-center">
+  <thead class="text-warning">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Applicant name</th>
+      <th scope="col">JOB Position</th>
+      <th scope="col">Response</th>
+    </tr>
+  </thead>
+ <tbody>
+{% for applicant in application %}
+
+ 
+    <tr id="block-{{applicant.applicant.user.username}}-{{applicant.applicant_job.job_id}}">
+      <th scope="row">{{forloop.counter}}</th>
+      <td><a style='text-decoration:none;color:white;' href="#">{{applicant.applicant.first_name|title}} {{applicant.applicant.last_name|title}} <i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
+      <td>{{applicant.applicant_job.job_title|title}}</td>
+      <td>
+      <form>{% csrf_token %}
+    <button type="button" id="erase-{{applicant.applicant.user.username}}-{{applicant.applicant_job.job_id}}" class="btn btn-danger btn-sm">Erase</button>
+      </form>
+      </td>
+    </tr>
+<script>
+$("#erase-{{applicant.applicant.user.username}}-{{applicant.applicant_job.job_id}}").click(function(){
+ let username="{{applicant.applicant.user.username}}";
+ let job_id={{applicant.applicant_job.job_id}};
+$.ajax({
+    type:'POST',
+    url:'/EMPLOYER/release-user/',
+    data:{
+        'username':username,
+        'job_id':job_id,
+        'csrfmiddlewaretoken':$("input[name='csrfmiddlewaretoken']").val(),
+    },
+    dataType:'json',
+    success:function(data){
+        
+       document.getElementById("block-{{applicant.applicant.user.username}}-{{applicant.applicant_job.job_id}}").style.display="none";
+    }
+});
+
+
+});
+</script>
+
+
+{% endfor %}
+  </tbody>
+</table>
+
+{% endfor %}
+
+
+</div>
+
+{% endblock content %}
