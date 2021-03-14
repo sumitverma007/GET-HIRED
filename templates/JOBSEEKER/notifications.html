@@ -1,0 +1,28 @@
+{% extends 'baseJ.html' %}
+{% block title %}
+Notifications
+{% endblock title %}
+{% block msgactive %}
+active
+{% endblock msgactive %}
+{% block content %}
+ {% for notification in notifications %}
+    <div class="container bg-light p-2 text-center my-2">
+        <h5 class="card-title text-danger">Congratulations !! <span class="lead text-primary">{{notification.applicant.first_name}}</span>
+        </h5>
+        <hr class="my-4">
+        <div class="card-body">
+            <p>You have been shortlisted for <span class="text-success font-weight-bold"> {{notification.applicant_job.job_title}} </span>position from 
+            <span class="text-success font-weight-bold"> {{notification.applicant_job.employer_name.name}} </span>.</p>
+            <p>Please follow this link for further info . <a data-toggle="collapse" href="#job-{{notification.applicant.first_name}}-{{notification.applicant_job.job_id}}" role="button" aria-expanded="false" aria-controls="job-{{notification.applicant.first_name}}-{{notification.applicant_job.job_id}}">
+    Click here see response from Employer.</a></p>
+        </div>
+        <div class="collapse" id="job-{{notification.applicant.first_name}}-{{notification.applicant_job.job_id}}">
+  <div class="card card-body">
+   {{notification.message|linebreaks}}
+  </div>
+</div>
+
+    </div>
+{% endfor %}
+{% endblock content %}

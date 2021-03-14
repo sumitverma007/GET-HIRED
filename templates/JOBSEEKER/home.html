@@ -4,6 +4,12 @@
 {% endblock title %}
 {% block homeactive %}active
 {% endblock homeactive %}active
+{% if notlen %}
+{% block notbadge %}
+<span class="badge badge-danger bg-danger">{{notlen}}</span>
+{% endblock notbadge %}
+
+{% endif %}
 {% block content %}
 <div class="row mt-2 text-light">
 {% if recent_post_cnt %}
@@ -24,7 +30,7 @@
         <div class="media-body">
         <p class="content-title">{{posts.article_title}}</p>
         <hr clas="my-2">
-      <p class="content-desc">{{posts.article_desc}}</p>    
+      <p class="content-desc">{{posts.article_desc|linebreaks}}</p>    
       {% if posts.article_media %}
       <div class="content-img mt-2 p-2">
       

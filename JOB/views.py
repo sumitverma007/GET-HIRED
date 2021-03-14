@@ -36,9 +36,13 @@ def relevant_jobs(request):
 
             # print(valid_job)
             len_count=len(valid_job)
+            notifications=SHORTLISTED.objects.filter(applicant=jobseeker,hasSeen=False)
+            
+            notlen=len(notifications)
             params={
                 'jobs':valid_job,
                 'len':len_count,
+                'notlen':notlen,
             }
             return render(request,'JOBSEEKER/relevant-jobs.html/',params)
 

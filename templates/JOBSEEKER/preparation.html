@@ -1,0 +1,15 @@
+{% extends 'basej.html' %}
+{% block title %}
+Preparation
+{% endblock title %}
+{% block prepareactive %}
+active{% endblock prepareactive %}
+{% if notlen %}
+{% block notbadge %}
+<span class="badge badge-danger bg-danger">{{notlen}}</span>
+{% endblock notbadge %}
+
+{% endif %}
+{% block content %}
+
+{% endblock content %}

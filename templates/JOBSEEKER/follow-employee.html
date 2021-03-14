@@ -5,6 +5,12 @@ Follow Employees
 {% block empactive %}   
 active
 {% endblock empactive %}    
+{% if notlen %}
+{% block notbadge %}
+<span class="badge badge-danger bg-danger">{{notlen}}</span>
+{% endblock notbadge %}
+
+{% endif %}
 {% block content %}
 
  {% for emp in employees%}

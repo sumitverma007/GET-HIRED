@@ -123,3 +123,11 @@ Next to do:
 Designed Shortlisted page
 Next to do:
       Design message notification from jobseeker pov
+
+
+*************  AFTER A LOOOONG BREAK ******************
+
+14.03.2021
+Implemented notification page and managed it as well.
+Next to do:
+            Implement Employer search function

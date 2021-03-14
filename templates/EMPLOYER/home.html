@@ -74,7 +74,7 @@ active
         <div class="media-body">
         <p class="content-title">{{post.article_title}}</p>
         <hr clas="my-2">
-      <p class="content-desc">{{post.article_desc}}</p>    
+      <p class="content-desc">{{post.article_desc|linebreaks}}</p>    
       {% if post.article_media %}
       <div class="content-img mt-2 p-2">
       

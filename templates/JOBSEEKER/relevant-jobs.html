@@ -5,6 +5,12 @@ Suitable Jobs
 {% block jobsactive %}
 active
 {% endblock jobsactive %}
+{% if notlen %}
+{% block notbadge %}
+<span class="badge badge-danger bg-danger">{{notlen}}</span>
+{% endblock notbadge %}
+
+{% endif %}
 {% block content %}
 {% if not len %}
 <h1>Not eligible for any jobs right now</h1>

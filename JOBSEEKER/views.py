@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from BASE.models import Follow
 from ARTICLE.models import ARTICLE 
+from JOB.models import SHORTLISTED
 from django.contrib.auth import authenticate,login,logout
 import random
 # Create your views here.
@@ -58,12 +59,16 @@ def home(request):
             
             user_qual=QUALIFICATIONS.objects.get(user=request.user)
             recent_post_cnt=len(recent_posts)
+            notifications=SHORTLISTED.objects.filter(applicant=obj,hasSeen=False)
+            
+            notlen=len(notifications)
             param={
                 'jbasic':obj,
                 'jqual':user_qual,
                 'emp_i_should_follow':emp_i_should_follow,
                 'recent_posts':recent_posts,
                 'recent_post_cnt':recent_post_cnt,
+                'notlen':notlen,
             }
            
 
@@ -145,9 +150,12 @@ def follow_employee(request):
                     follower_len=len(followers)
                     emp_i_should_follow.append([emp,follower_len])
 
+        notifications=SHORTLISTED.objects.filter(applicant=jobseeker,hasSeen=False)
             
+        notlen=len(notifications)   
         param={
-            'employees':emp_i_should_follow
+            'employees':emp_i_should_follow,
+            'notlen':notlen,
         }
 
         
@@ -160,3 +168,37 @@ def follow_employee(request):
         
      
     return render(request,"JOBSEEKER/follow-employee.html/")
+
+
+def mymsg(request):
+    
+    user=User.objects.get(username=request.user)
+    jobseeker=JOBSEEKER.objects.get(user=user)
+    notications=SHORTLISTED.objects.filter(applicant=jobseeker,hasSeen=False)
+    for noti in notications:
+        noti.hasSeen=True
+        noti.save()
+    notification=SHORTLISTED.objects.filter(applicant=jobseeker).order_by('-id')
+    # print(notification)
+    param={
+        'notifications':notification
+    }
+    return render(request,"JOBSEEKER/notifications.html/",param)
+
+def prepare(request):
+    if request.user.is_authenticated:
+        try:
+            jobseeker=JOBSEEKER.objects.get(user=request.user)
+            notifications=SHORTLISTED.objects.filter(applicant=jobseeker,hasSeen=False)
+            notlen=len(notifications)
+            param={
+                'notlen':notlen,
+            }
+            return render(request,"JOBSEEKER/preparation.html/",param)
+
+
+        except:
+            return redirect('/')    
+
+    else:
+        return redirect('/')    

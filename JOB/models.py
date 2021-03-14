@@ -32,4 +32,5 @@ class APPLICATIONS(models.Model):
 class SHORTLISTED(models.Model):
     applicant=models.ForeignKey(JOBSEEKER,on_delete=models.CASCADE)
     message=models.TextField(null=True,blank=True)
+    hasSeen=models.BooleanField(default=False)
     applicant_job=models.ForeignKey(JOB,on_delete=models.CASCADE)
