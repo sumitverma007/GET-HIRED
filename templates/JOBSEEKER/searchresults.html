@@ -1,0 +1,64 @@
+{% extends 'basej.html' %}
+{% block title %}
+search-results
+{% endblock title %}
+{% block content %}
+{% if not emplen %}
+<div class="container bg-light p-3 my-3">
+<div class="card-section">
+<p aria-level="3" role="heading" style="padding-top:.33em">Your search - <span><strong>{{query}}</strong></span> - did not match any documents.</p>
+<p style="margin-top:1em">Suggestions:</p><ul style="margin-left:1.3em;margin-bottom:2em">
+<li>Make sure that all words are spelled correctly.</li>
+<li>Try different keywords.</li>
+<li>Try more general keywords.</li>
+<li>Try fewer keywords.</li></ul>
+</div>
+<a href="/">Return to Home</a>
+</div>
+{% else %}
+
+{% for emp in employers%}
+<div class="container border my-2 text-white" id="emp-block-{{emp.user.username}}">
+  <h2  style="color: #cad6ec;
+    font-family: -webkit-pictograph;">
+  {% if emp.profile_pic %}
+  <img src="/media/{{emp.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
+     {% else %}
+     {% load static %}
+<img src="{% static 'images/emp_default.png/' %}"  class="mr-3 profile_img rounded-circle">
+ {% endif %}
+  {{emp.name|title}}
+ 
+  </h2>
+  <hr class="my-2">
+
+  <p>About</p>
+  <hr class="my-2">
+  <div class="text-center">
+  <button class="btn btn-success  my-1" id="emp-{{emp.user.username}}" value="{{emp.user.username}}">Follow</button>
+  </div>
+</div>
+<script>
+$("#emp-{{emp.user.username}}").click(function(){
+let employer=$(this).val();
+$.ajax({
+   url:'/follow-employee/',
+   data:{
+     'employer':employer
+   },
+   dataType:'Json',
+   success:function(data){
+       document.getElementById("emp-block-{{emp.user.username}}").style.display="none";
+  
+   }
+
+});
+});
+</script>
+ {% endfor %}
+
+{% endif %}
+
+
+
+{% endblock content %}

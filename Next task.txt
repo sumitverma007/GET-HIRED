@@ -131,3 +131,9 @@ Next to do:
 Implemented notification page and managed it as well.
 Next to do:
             Implement Employer search function
+            handle logout for jobseeker and employer
+
+15.03.2021
+Implemented Employer search function and handled logging out function
+Next to do:
+            Design manage profile page for (with edits functions) to jobseeker

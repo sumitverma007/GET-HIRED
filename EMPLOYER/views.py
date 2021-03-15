@@ -372,3 +372,11 @@ def releaseuser(request):
 
     else:
         return redirect('/')    
+
+
+def handlelogout(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('/')
+    else:
+        return redirect('/')    

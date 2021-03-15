@@ -202,3 +202,43 @@ def prepare(request):
 
     else:
         return redirect('/')    
+
+def search(request):
+    if request.method=='POST':
+        curr_user=request.user.username
+        # jobseeker=JOBSEEKER.objects.get(user=request.user)
+        queryname=request.POST.get('searchquery')
+        finalquery=queryname.lower()
+        employers=EMPLOYER.objects.all()
+        emp_i_follow=Follow.objects.filter(job_seeker=curr_user)
+        print(emp_i_follow)
+        emp_list=[]
+        for emp in emp_i_follow:
+            # print(emp.employer)
+            emp_list.append(emp.employer)
+
+        # print(emp_list)    
+        suitableemployer=[]
+        for emp in employers:
+            if finalquery in emp.name.lower() and emp.user.username not in emp_list:
+                suitableemployer.append(emp)
+
+        # print(suitableemployer)
+        emplen=len(suitableemployer)
+        param={
+            'emplen':emplen,
+            'employers':suitableemployer,
+            'query':queryname,
+        }
+        return render(request,"JOBSEEKER/searchresults.html/",param)
+        
+    else:
+        return redirect('/')    
+
+
+def handlelogout(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('/')
+    else:
+        return redirect('/')            

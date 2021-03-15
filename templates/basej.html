@@ -51,8 +51,8 @@
           {% endblock  %}" href="/JOBSEEKER/prepare/"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Prepare</a>
         </li>
    </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search Employers " aria-label="Search">
+      <form action="/JOBSEEKER/search/" method="POST" class="d-flex">{% csrf_token %}
+        <input class="form-control me-2" type="search" name="searchquery" placeholder="Search Employers " aria-label="Search" Required>
         <button class="btn btn-outline-secondary" type="submit">Search</button>
       </form>
     <ul class="navbar-nav ml-2 mb-2 mb-lg-0">
@@ -64,7 +64,7 @@
             <li><a class="dropdown-item text-light" href="#"><i class="fa fa-cogs" aria-hidden="true"></i> Manage Profile</a></li>
             <li><a class="dropdown-item text-light" href="#"><i class="fa fa-suitcase" aria-hidden="true"></i> My jobs</a></li>
            
-            <li><a class="dropdown-item text-light" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+            <li><a class="dropdown-item text-light" href="/JOBSEEKER/handlelogout/"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
           </ul>
         </li>
       

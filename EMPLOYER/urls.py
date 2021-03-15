@@ -17,4 +17,5 @@ urlpatterns = [
     path('reject-user/',views.rejectuser,name="rejectuser"),
     path('receive-response/<str:slug>/<int:id>/',views.receiveresponse,name="receive response"),
     path('delete-article/article/<int:id>/',views.deletepost,name="delete_post"),
+    path('handlelogout/',views.handlelogout,name="logout"),
 ]

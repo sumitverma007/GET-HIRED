@@ -8,5 +8,7 @@ urlpatterns = [
     path('registerjobseeker/',views.registerjobseeker,name="jobseeker reg"),
     path('follow-employee/',views.follow_employee,name="follow employee"),
     path('messages/',views.mymsg,name="notification"),
-    path('prepare/',views.prepare,name="preparation",)
+    path('prepare/',views.prepare,name="preparation"),
+    path('search/',views.search,name="querysearch"),
+    path('handlelogout/',views.handlelogout,name="logout"),
 ]
