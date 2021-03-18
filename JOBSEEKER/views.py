@@ -5,7 +5,7 @@ from EMPLOYER.models import EMPLOYER
 from django.contrib.auth.models import User
 from django.contrib import messages
 from BASE.models import Follow
-from ARTICLE.models import ARTICLE 
+from ARTICLE.models import ARTICLE,LOVEDPOST,COMMENT 
 from JOB.models import SHORTLISTED
 from django.contrib.auth import authenticate,login,logout
 import random
@@ -47,7 +47,14 @@ def home(request):
                     print(e)     
             random.shuffle(recent_posts)   
               
-            
+            target_post=[]
+
+            for post in recent_posts:
+                lovedpost=LOVEDPOST.objects.filter(article=post)
+                lovesize=len(lovedpost)
+                comments=COMMENT.objects.filter(article=post)
+                commentsize=len(comments)
+                target_post.append([post,lovesize,commentsize,comments])
 
 
             emp_i_should_follow=[]
@@ -66,7 +73,8 @@ def home(request):
                 'jbasic':obj,
                 'jqual':user_qual,
                 'emp_i_should_follow':emp_i_should_follow,
-                'recent_posts':recent_posts,
+                # 'recent_posts':recent_posts,
+                'recent_posts':target_post,
                 'recent_post_cnt':recent_post_cnt,
                 'notlen':notlen,
             }

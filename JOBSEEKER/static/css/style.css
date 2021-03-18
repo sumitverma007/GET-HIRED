@@ -40,7 +40,7 @@ body{
     /* border:1px solid black;
     border-radius: 10px; */
     /* background-color: #2223279e; */
-background-color: #010105fa;
+/* background-color: #010105fa; */
 }
 .media_content{
       background-color: #081b31!important;
@@ -119,6 +119,35 @@ background-color: #010105fa;
     border-radius: 6px;
     margin-top: 6px;
 }
+.comment-pane{
+    background: none;
+}
+.comment-pane button{
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    color:white;
+}
+.comment-pane img{
+    width:16px;
+    height:16px;
+    background:#081b31!important; 
+}
+.comment-anchor:hover{
+    color:green;
+}
+.comment-content{
+    background-color:rgb(254,249,249);
+    color: black;
+    border-radius: 40px;
+}
+.comment-content .media-body{
+    position: relative;
+    margin-left:36px;
+    padding:0;
+}
+
 @media screen and (max-width: 600px) {
  .aside-content{
      display: none;

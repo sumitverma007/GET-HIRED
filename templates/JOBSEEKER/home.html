@@ -13,31 +13,85 @@
 {% block content %}
 <div class="row mt-2 text-light">
 {% if recent_post_cnt %}
-<div class="col-md-8 ml-1 border  article_content">
+<div class="col-md-8 ml-1   article_content">
 <!-- one article post starts here-->
 {% for posts in recent_posts %}
  <div class="media  p-3 mb-2 border  media_content">
-   <strong class="d-inline-block mb-2 content-tag">{{posts.tag}}</strong>
+   <strong class="d-inline-block mb-2 content-tag">{{posts.0.tag}}</strong>
   <p>
-     {% if posts.employer_name.profile_pic %}
-     <img src="/media/{{posts.employer_name.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
+     {% if posts.0.employer_name.profile_pic %}
+     <img src="/media/{{posts.0.employer_name.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
      {% else %}
      {% load static %}
         <img src="{% static 'images/emp_default.png/' %}"  class="mr-3 profile_img rounded-circle">
         {% endif %}
      <span class="content-author">
-     {{posts.employer_name.name}} </span><small><i>Posted on {{posts.time_stamp}}</i></small></p>
+     {{posts.0.employer_name.name}} </span><small><i>Posted on {{posts.0.time_stamp}}</i></small></p>
         <div class="media-body">
-        <p class="content-title">{{posts.article_title}}</p>
+        <p class="content-title">{{posts.0.article_title}}</p>
         <hr clas="my-2">
-      <p class="content-desc">{{posts.article_desc|linebreaks}}</p>    
-      {% if posts.article_media %}
+      <p class="content-desc">{{posts.0.article_desc|linebreaks}}</p>    
+      {% if posts.0.article_media %}
       <div class="content-img mt-2 p-2">
       
-       <img src="/media/{{posts.article_media}}" ></img>
+       <img src="/media/{{posts.0.article_media}}" ></img>
       </div>  
       {% endif %}
     </div>
+    <hr class="my-1">
+    <div class="comment-pane">
+    <button class="mx-2">  <img id="article-by-{{posts.0.article_id}}"src="{% static 'images/like.png/' %}"  class=" comment-pane-img"> {{posts.1}} Upvotes</button> 
+     <button class="mx-2" data-toggle="collapse" data-target="#comment-{{posts.0.article_id}}" aria-expanded="false" aria-controls="comment-{{posts.0.article_id}}"> <i class="fa fa-comment text-light" aria-hidden="true"></i> {{posts.2}} Comments </button>
+    </div>  <hr class="my-1">
+    <div class="collapse" id="comment-{{posts.0.article_id}}" >
+      <form class="my-2" method="POST">{% csrf_token %}
+      <div class="input-group">
+         <input type="text" class="form-control mr-sm-2" name="comment" id="comment" placeholder="Enter your Comment" required>
+           <span class="input-group-btn"> 
+        <button type="submit" class="btn btn-success" value="submit"><i class="fa fa-chevron-circle-right"></i></button>
+       </div>
+       </span> </form>
+       <!-- handle comment here-->
+     
+
+      <a data-toggle="collapse" href="#reply-{{posts.0.article_id}}" role="button" aria-expanded="false" aria-controls="reply-{{posts.0.article_id}}" class="text-light comment-anchor"><i>load recent comments({{posts.2}})</i></a>
+
+      <div class="collapse" id="reply-{{posts.0.article_id}}">
+    {% for comment in posts.3 %}
+
+    <div class="media  p-2 my-2 comment-content">
+ 
+  <p>
+    
+     {% load static %}
+        <img src="{% static 'images/emp_default.png/' %}"  class="mr-3 profile_img rounded-circle">
+       
+     <span class="content-author">
+     {{comment.jobseeker.first_name|title}} {{comment.jobseeker.last_name|title}}</span><small><i> Posted on {{comment.timestamp}}</i></small></p>
+           <hr clas="my-1">
+        <div class="media-body">
+       
+     
+      <p>{{comment.commenttext|linebreaks}}</p>    
+       </div>  
+        </div>
+   {% endfor %}
+  
+ </div>
+
+</div>
+
+
+
+    <script>  
+      $("#article-by-{{posts.0.article_id}}").on({
+        'click':function()
+        {
+          $("#article-by-{{posts.0.article_id}}").attr('src',"{% static 'images/liked.png/' %}");
+        }
+      });
+    </script>
+   
   </div>
   {% endfor %}
   {% else %}
