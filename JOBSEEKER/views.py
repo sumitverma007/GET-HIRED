@@ -7,6 +7,7 @@ from django.contrib import messages
 from BASE.models import Follow
 from ARTICLE.models import ARTICLE,LOVEDPOST,COMMENT 
 from JOB.models import SHORTLISTED
+from django.http import JsonResponse
 from django.contrib.auth import authenticate,login,logout
 import random
 # Create your views here.
@@ -51,10 +52,14 @@ def home(request):
 
             for post in recent_posts:
                 lovedpost=LOVEDPOST.objects.filter(article=post)
+                if_liked=LOVEDPOST.objects.filter(jobseeker=obj,article=post)
+                llen=len(if_liked)
+                # print(llen)
+                
                 lovesize=len(lovedpost)
                 comments=COMMENT.objects.filter(article=post)
                 commentsize=len(comments)
-                target_post.append([post,lovesize,commentsize,comments])
+                target_post.append([post,lovesize,commentsize,comments,llen])
 
 
             emp_i_should_follow=[]
@@ -250,3 +255,38 @@ def handlelogout(request):
         return redirect('/')
     else:
         return redirect('/')            
+
+def handlecomment(request):
+    if request.method=='POST':
+        jobseeker=JOBSEEKER.objects.get(user=request.user)
+
+
+        message=request.POST.get('message')
+        article_id=request.POST.get('article_id')
+        article=ARTICLE.objects.get(article_id=article_id)
+        new_msg=COMMENT.objects.create(jobseeker=jobseeker,article=article,commenttext=message)
+        # print(message,article,jobseeker)
+        
+        data={
+            'is_ok':1
+        }
+        return JsonResponse(data)
+
+
+
+    else:
+        return redirect('/')    
+
+
+def lovepost(request):
+    if request.user.is_authenticated:
+        jobseeker=JOBSEEKER.objects.get(user=request.user)
+        article_id=request.GET.get('article_id')
+        article=ARTICLE.objects.get(article_id=article_id)
+        new_like=LOVEDPOST.objects.create(jobseeker=jobseeker,article=article)
+        data={
+            'is-ok':1,
+        }
+        return JsonResponse(data)
+    else:
+        return redirect('/')    

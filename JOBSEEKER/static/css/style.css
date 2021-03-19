@@ -140,7 +140,7 @@ body{
 .comment-content{
     background-color:rgb(254,249,249);
     color: black;
-    border-radius: 40px;
+    border-radius: 11px;
 }
 .comment-content .media-body{
     position: relative;

@@ -10,5 +10,7 @@ urlpatterns = [
     path('messages/',views.mymsg,name="notification"),
     path('prepare/',views.prepare,name="preparation"),
     path('search/',views.search,name="querysearch"),
+    path('handle_comment/',views.handlecomment,name="comment-publish"),
+    path('handlelove/',views.lovepost,name="postlove"),
     path('handlelogout/',views.handlelogout,name="logout"),
 ]

@@ -137,3 +137,18 @@ Next to do:
 Implemented Employer search function and handled logging out function
 Next to do:
             Design manage profile page for (with edits functions) to jobseeker
+
+18.03.2021
+Implemented comment pane
+Next to do:
+      comment and likes
+      Design manage profile page for (with edits functions) to jobseeker
+
+
+19.03.2021
+handled comments and like functions .
+Next to do:
+      Design manage profile page(edit enabled) to jobseekr .For eg functions like change marks,resume,profile pic etc.
+
+
+

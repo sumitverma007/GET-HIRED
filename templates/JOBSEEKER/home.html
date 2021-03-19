@@ -40,19 +40,76 @@
     </div>
     <hr class="my-1">
     <div class="comment-pane">
-    <button class="mx-2">  <img id="article-by-{{posts.0.article_id}}"src="{% static 'images/like.png/' %}"  class=" comment-pane-img"> {{posts.1}} Upvotes</button> 
+
+    {% if posts.4 %}
+      <button class="mx-2">  <img src="{% static 'images/liked.png/' %}"  class="comment-pane-img" disabled > {{posts.1}} Upvotes</button> 
+    {% else %}
+     <button id="like_btn_{{posts.0.article_id}}" class="mx-2">  <img id="article-by-{{posts.0.article_id}}"src="{% static 'images/like.png/' %}"  class=" comment-pane-img"><span id="like-count{{posts.0.article_id}}"> {{posts.1}} </span> Upvotes</button> 
+    {% endif %}  
+   
      <button class="mx-2" data-toggle="collapse" data-target="#comment-{{posts.0.article_id}}" aria-expanded="false" aria-controls="comment-{{posts.0.article_id}}"> <i class="fa fa-comment text-light" aria-hidden="true"></i> {{posts.2}} Comments </button>
     </div>  <hr class="my-1">
     <div class="collapse" id="comment-{{posts.0.article_id}}" >
-      <form class="my-2" method="POST">{% csrf_token %}
+      
+      
+      
+      <form id="comment-{{posts.0.article_id}}" class="my-2" method="POST">{% csrf_token %}
       <div class="input-group">
-         <input type="text" class="form-control mr-sm-2" name="comment" id="comment" placeholder="Enter your Comment" required>
+         <input type="text" class="form-control mr-sm-2" name="comment" id="comment-on-{{posts.0.article_id}}" placeholder="Enter your Comment" required>
            <span class="input-group-btn"> 
         <button type="submit" class="btn btn-success" value="submit"><i class="fa fa-chevron-circle-right"></i></button>
        </div>
        </span> </form>
-       <!-- handle comment here-->
+
+      <!-- comment posted here-->
+       <div class="media  p-2 my-2 comment-content" id="show-comment-{{posts.0.article_id}}"  style="display:none;">
+ 
+  <p>
+    
+     {% load static %}
+        <img src="{% static 'images/emp_default.png/' %}"  class="mr-3 profile_img rounded-circle">
+       
+     <span class="content-author">
+     {{jbasic.first_name|title}} {{jbasic.last_name|title}}</span><small><i> Posted just now</i></small></p>
+           <hr clas="my-1">
+        <div class="media-body">
+       
      
+      <p id="comment-by-{{posts.0.article_id}}"></p>    
+       </div>  
+        </div>
+
+       <!-- handle comment here-->
+     <script>
+        $(document).on('submit','#comment-{{posts.0.article_id}}',function(e){
+       e.preventDefault();
+          let message=$("#comment-on-{{posts.0.article_id}}").val();
+          let article_id={{posts.0.article_id}};
+
+          $.ajax({
+             type:'POST',
+              async: false,
+              url:'/JOBSEEKER/handle_comment/',
+               data:{
+                    'message':message,
+                    'article_id':article_id,
+                    'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken').val()
+               },
+          dataType:'json',
+          success:function(data){
+            if(data.is_ok){
+              document.getElementById("comment-by-{{posts.0.article_id}}").innerHTML=message;
+              document.getElementById("show-comment-{{posts.0.article_id}}").style.display="block";
+              $("#comment-on-{{posts.0.article_id}}").reset();
+            }
+
+          }
+        
+          });
+           e.stopImmediatePropagation();
+           return false;
+        });
+     </script>
 
       <a data-toggle="collapse" href="#reply-{{posts.0.article_id}}" role="button" aria-expanded="false" aria-controls="reply-{{posts.0.article_id}}" class="text-light comment-anchor"><i>load recent comments({{posts.2}})</i></a>
 
@@ -87,7 +144,29 @@
       $("#article-by-{{posts.0.article_id}}").on({
         'click':function()
         {
-          $("#article-by-{{posts.0.article_id}}").attr('src',"{% static 'images/liked.png/' %}");
+          
+          let article_id={{posts.0.article_id}};
+          let lcount={{posts.1}};
+          lcount=lcount+1;
+          let newlike=lcount.toString();
+       $.ajax({
+         url:'/JOBSEEKER/handlelove/',
+         data:{
+           'article_id':article_id,
+         },
+         dataType:'json',
+         success:function(data){
+              $("#article-by-{{posts.0.article_id}}").attr('src',"{% static 'images/liked.png/' %}");
+             $("#like-count{{posts.0.article_id}}").text(newlike);
+             $("#like_btn_{{posts.0.article_id}}").prop('disabled',true);
+            
+
+          
+         }
+
+       })
+         
+        
         }
       });
     </script>

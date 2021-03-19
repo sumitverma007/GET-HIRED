@@ -20,10 +20,7 @@ class LOVEDPOST(models.Model):
     jobseeker=models.ForeignKey(JOBSEEKER,on_delete=models.CASCADE)
     article=models.ForeignKey(ARTICLE,on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.jobseeker + " likes "+article
-
-
+   
 class COMMENT(models.Model):
     jobseeker=models.ForeignKey(JOBSEEKER,on_delete=models.CASCADE)
     article=models.ForeignKey(ARTICLE,on_delete=models.CASCADE)
