@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% endcomment %}
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    {% load static %}
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <style>
+   *{
+       padding:0;
+       margin:0;
+
+        font-family: sans-serif;
+       box-sizing:border-box;
+   }
+   body{
+      background-color: #081b31!important;
+   }
+   </style>
+ 
+    <title>Edit profile
+    </title>
+    <link rel="icon" href="{% static 'images/logo1.png/' %}" type="image/x-icon">
+  </head>
+  <body>
+    <div class="container my-4 bg-light border">
+
+        <form action="#"   method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="mb-3 mt-2">
+            <label for="jUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="jUsername" name="jUsername" value="@{{jobseeker.user.username}}" aria-describedby="jUsernameValid" disabled></input>
+         
+        </div>
+        <div class="mb-3">
+            <label for="jemail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="jemail" name="jemail" value="{{jobseeker.email}}"></input>
+            
+        </div>
+        <div class="mb-3">
+            <label for="jPhone" class="form-label">Phone Number(Without country code)</label>
+            <input type="text" class="form-control" id="jPhone" name="jPhone" value="{{jobseeker.phone}}"></input>
+            
+        </div>
+       <div class="input-group mb-3">
+            <input type="text" class="form-control" id="jFirstName" name="jFirstName"  value="{{jobseeker.first_name}}" ></input>
+            <input type="text" class="form-control" id="jLastName" name="jLastName" value="{{jobseeker.last_name}}"></input>
+         
+        </div>
+           <div class="input-group mb-3">
+            <input type="text" class="form-control" id="jXmarks" name="jXmarks" placeholder=" 10th marks (in %)" value="{{qualification.x_marks}}"></input>
+            <input type="text" class="form-control" id="jXiimarks" name="jXiimarks" placeholder="12th Marks (in %)" value="{{qualification.xii_marks}}" ></input>
+         <input type="text" class="form-control" id="jGradmarks" name="jGradmarks" placeholder="Graduation Marks (in %)" value="{{qualification.grad_marks}}" ></input>
+
+        </div>
+       
+        <div class="mb-3">
+        <label for="jProfilePic" class="form-label">Edit Picture</label>
+        <input type="file" id="jProfilePic" name="jProfilePic" class="form-control" ></input>
+        </div>
+        <div class="mb-3">
+        <label for="jResume" class="form-label">Edit Your Resume</label>
+        <input type="file" id="jResume" name="jResume" class="form-control" ></input>
+        </div>
+        <div class="mb-3 text-center">
+         <button class="btn btn-success" type="submit">Update</button>
+        </div>
+       </form>
+     
+     
+     
+    </div> 
+ 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+ 
+  </body>
+</html>

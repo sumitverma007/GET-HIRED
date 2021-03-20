@@ -1,0 +1,74 @@
+{% extends 'basej.html' %}
+{% block title %}Profile{% endblock title %}
+{% if notlen %}
+{% block notbadge %}
+<span class="badge badge-danger bg-danger">{{notlen}}</span>
+{% endblock notbadge %}
+
+{% endif %}
+
+{% block content %}
+<div class="container-fluid text-light">
+<div class="row">
+<div class="col col-md-3 text-center">
+
+
+<div class="card" style="width: 15rem;">
+{% if qualification.profile_pic %}
+   <img class="card-img-top" src="/media/{{qualification.profile_pic}}" alt="img" >
+{% else %}
+  {% load static %}
+        <img  class="card-img-top" src="{% static 'images/emp_default.png/' %}">
+{% endif %}
+
+  <div class="card-body">
+    <h5 class="card-title" style="color:green"><i class="fa fa-user-o" aria-hidden="true"></i> {{jobseeker.first_name|title}} {{jobseeker.last_name}}  </h5>
+    <h6 class="card-title" style="color:green"><i class="fa fa-mobile" aria-hidden="true"></i> +91-{{jobseeker.phone}} </h6>
+    <p class="card-text" style="font-size:15px;"><a class="text-success" href="mailto:{{jobseeker.email}}"><i class="fa fa-envelope-o" aria-hidden="true"></i> {{jobseeker.email}}</a></p>
+
+
+  </div>
+</div>
+
+</div>
+
+<div class="col col-md-9">
+<h2 class="card-title my-2">Qualifications</h2>
+<div class="x_progress">
+Class 10 marks(in %):
+<div class="progress my-2">
+  <div class="progress-bar bg-success" role="progressbar" style="width: {{qualification.x_marks}}%;" aria-valuenow="{{qualification.x_marks}}" aria-valuemin="0" aria-valuemax="100">{{qualification.x_marks}}%</div>
+</div>
+  </div>
+
+
+<div class="xii_progress">
+Class 12 marks(in %):
+<div class="progress my-2">
+  <div class="progress-bar bg-success" role="progressbar" style="width: {{qualification.xii_marks}}%;" aria-valuenow="{{qualification.xii_marks}}" aria-valuemin="0" aria-valuemax="100">{{qualification.xii_marks}}%</div>
+</div>
+  </div>
+
+
+<div class="grad_progress">
+Graduation Grade(in %):
+<div class="progress my-2">
+  <div class="progress-bar bg-success" role="progressbar" style="width: {{qualification.grad_marks}}%;" aria-valuenow="{{qualification.grad_marks}}" aria-valuemin="0" aria-valuemax="100">{{qualification.grad_marks}}%</div>
+</div>
+  </div>
+{% if qualification.resume %}
+<div class="grad_progress">
+
+<div class="resume_pro text-light">
+<a target="_blank" href="/media/{{qualfication.resume}}">Resume</a> <i class="fa fa-external-link" aria-hidden="true"></i>
+</div>
+</div>
+{% endif %}
+<div class="grad_progress my-4 text-center">
+<a href="/JOBSEEKER/edit_profile/" class="btn btn-lg btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit profile</a>
+</div>
+
+
+</div>
+</div>
+{% endblock content %}

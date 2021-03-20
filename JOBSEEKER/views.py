@@ -290,3 +290,63 @@ def lovepost(request):
         return JsonResponse(data)
     else:
         return redirect('/')    
+
+def profile(request):
+    # return HttpResponse("edit profile")
+    jobseeker=JOBSEEKER.objects.get(user=request.user)
+    qualification=QUALIFICATIONS.objects.get(user=request.user)
+    notifications=SHORTLISTED.objects.filter(applicant=jobseeker,hasSeen=False)
+    notlen=len(notifications)
+    
+    
+    param={
+        'notlen':notlen,
+        'jobseeker':jobseeker,
+        'qualification':qualification,
+       
+    }
+    return render(request,'JOBSEEKER/profile.html/',param)
+
+
+def editprofile(request):
+    if request.user.is_authenticated:
+        if request.method=='POST':
+            
+            jobseeker=JOBSEEKER.objects.get(user=request.user)
+            qualification=QUALIFICATIONS.objects.get(user=request.user)
+            first_name=request.POST.get('jFirstName',None)
+            last_name=request.POST.get('jLastName',None)
+            email=request.POST.get('jemail',None)
+            x_marks=request.POST.get('jXmarks')
+            xii_marks=request.POST.get('jXiimarks')
+            grad_marks =request.POST.get('jGradmarks')
+            
+            phone=request.POST.get('jPhone')
+            profile_pic=request.FILES.get('jProfilePic',None)
+            resume=request.FILES.get('jResume',None)
+            jobseeker.first_name=first_name
+            jobseeker.last_name=last_name
+            jobseeker.email=email
+            jobseeker.phone=phone
+            qualification.x_marks=x_marks
+            qualification.xii_marks=xii_marks
+            qualification.grad_marks=grad_marks
+            if profile_pic is not None:
+                qualification.profile_pic=profile_pic
+            if resume is not None:
+                qualification.resume=resume
+
+            jobseeker.save()
+            qualification.save()        
+            # print(first_name,last_name,email,x_marks,xii_marks,grad_marks,phone)
+            return redirect('/JOBSEEKER/profile/')
+
+        jobseeker=JOBSEEKER.objects.get(user=request.user)
+        qualification=QUALIFICATIONS.objects.get(user=request.user)
+        param={
+            'jobseeker':jobseeker,
+            'qualification':qualification,
+        }
+        return render(request,'JOBSEEKER/edit-profile.html/',param)
+    else:
+        return redirect('/')    

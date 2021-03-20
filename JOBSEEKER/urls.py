@@ -12,5 +12,7 @@ urlpatterns = [
     path('search/',views.search,name="querysearch"),
     path('handle_comment/',views.handlecomment,name="comment-publish"),
     path('handlelove/',views.lovepost,name="postlove"),
+    path('profile/',views.profile,name="manage profile"),
+    path('edit_profile/',views.editprofile,name="edit profile"),
     path('handlelogout/',views.handlelogout,name="logout"),
 ]

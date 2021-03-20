@@ -147,7 +147,14 @@ body{
     margin-left:36px;
     padding:0;
 }
-
+.resume_pro a{
+    font-size: larger;
+    color:white;
+    text-decoration: none;
+}
+.resume_pro a:hover{
+    color:green;
+}
 @media screen and (max-width: 600px) {
  .aside-content{
      display: none;
