@@ -1,0 +1,66 @@
+{% extends 'baseE.html' %}
+{% block title  %}
+My profile
+{% endblock title  %}
+
+{% block content %}
+
+<div class="container-fluid text-light my-3">
+<div class="row">
+<div class="col col-md-3 text-center">
+
+
+<div class="card" style="width: 15rem;">
+{% if employer.profile_pic %}
+   <img class="card-img-top" src="/media/{{employer.profile_pic}}" alt="img" >
+{% else %}
+  {% load static %}
+        <img  class="card-img-top" src="{% static 'images/emp_default.png/' %}">
+{% endif %}
+
+  <div class="card-body">
+  <h6 class="card-title" style="color:green">@{{employer.user.username}} </h6>
+    <h5 class="card-title" style="color:green"><i class="fa fa-user-o" aria-hidden="true"></i> {{employer.name|title}} </h5>
+      <h5 class="card-title" style="color:green">CIN {{employer.cin_num}} </h5>
+    
+  
+
+
+  </div>
+</div>
+
+</div>
+
+<div class="col col-md-9 ">
+<div class="text-center mb-2">
+<h2 class="card-title text-success my-2">Active Jobs</h2>
+</div>
+<table class="table text-light">
+<thead>
+<tr>
+    <th scope="col">#</th>
+    <th scopt="col">Job Title</th>
+    <th scopt="col">Description</th>
+</tr>
+</thead>
+<tbody>
+
+{% for job in myjobs %}
+<tr>
+<th scope="row">{{forloop.counter}}</th>
+<td>{{job.job_title}}</td>
+<td>{{job.job_desc}}</td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+<div class="grad_progress my-4 text-center">
+<a href="/EMPLOYER/edit_profile/" class="btn btn-lg btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit profile</a>
+</div>
+
+
+</div>
+</div>
+
+{% endblock content %}

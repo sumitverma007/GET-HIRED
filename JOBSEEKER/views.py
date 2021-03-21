@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from BASE.models import Follow
 from ARTICLE.models import ARTICLE,LOVEDPOST,COMMENT 
-from JOB.models import SHORTLISTED
+from JOB.models import SHORTLISTED,APPLICATIONS
 from django.http import JsonResponse
 from django.contrib.auth import authenticate,login,logout
 import random
@@ -350,3 +350,26 @@ def editprofile(request):
         return render(request,'JOBSEEKER/edit-profile.html/',param)
     else:
         return redirect('/')    
+
+
+def myjobs(request):
+    if request.user.is_authenticated:
+        jobseeker=JOBSEEKER.objects.get(user=request.user)
+        flist=[]
+        myapplications = APPLICATIONS.objects.filter(applicant=jobseeker)
+        shortlisted=SHORTLISTED.objects.filter(applicant=jobseeker)
+        for app in shortlisted:
+            flist.append([app.applicant_job,"Accepted"])    
+
+        for app in myapplications:
+            flist.append([app.applicant_job,"Waiting"])
+
+        
+        param={
+            'jobs':flist,
+        }    
+        return render(request,'JOBSEEKER/my-jobs.html/',param)
+
+    else:
+        return redirect('/')         
+

@@ -18,4 +18,6 @@ urlpatterns = [
     path('receive-response/<str:slug>/<int:id>/',views.receiveresponse,name="receive response"),
     path('delete-article/article/<int:id>/',views.deletepost,name="delete_post"),
     path('handlelogout/',views.handlelogout,name="logout"),
+    path('profile/',views.profile,name="profile"),
+    path('edit_profile/',views.editprofile,name="edit profile"),
 ]

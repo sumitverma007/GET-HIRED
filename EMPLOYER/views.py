@@ -380,3 +380,54 @@ def handlelogout(request):
         return redirect('/')
     else:
         return redirect('/')    
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        employer=EMPLOYER.objects.get(user=request.user)
+        myjobs=JOB.objects.filter(employer_name=employer)
+        param={
+            'employer':employer,
+            'myjobs':myjobs,
+        }
+        return render(request,'EMPLOYER/profile.html/',param)     
+    else:
+        return redirect('/')    
+
+
+def editprofile(request):
+    if request.user.is_authenticated:
+        if request.method=='POST':
+            username=request.POST.get('eUsername')
+            
+            email=request.POST.get('eEmail')
+            cin_no=request.POST.get('eCin')
+            name=request.POST.get('eName')
+            profile_pic=request.FILES.get('eProfilepic')
+
+        employer=EMPLOYER.objects.get(user=request.user)
+        if request.method=='POST':
+            username=request.POST.get('eUsername')
+            
+            email=request.POST.get('eEmail')
+            employer.email=email
+            cin_no=request.POST.get('eCin')
+            name=request.POST.get('eName')
+            employer.name=name
+            
+            profile_pic=request.FILES.get('eProfilepic',None)
+            if profile_pic is not None:
+                employer.profile_pic=profile_pic
+
+            employer.save()
+            return redirect('/EMPLOYER/profile/')    
+
+        param={
+            'employer':employer,
+        }
+        return render(request,'EMPLOYER/edit-profile.html/',param)
+
+
+    else:
+        return redirect('/')    
+

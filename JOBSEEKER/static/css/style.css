@@ -25,8 +25,9 @@ body{
     margin-right:20px;
 }
 .edit-prof a:hover{
+    transition: 0.6s ease;;
     color:rgb(236, 233, 233);
-    background-color:#858c94 ;
+    background-color:green ;
 }
 
 .user_img img{

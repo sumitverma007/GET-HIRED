@@ -15,4 +15,5 @@ urlpatterns = [
     path('profile/',views.profile,name="manage profile"),
     path('edit_profile/',views.editprofile,name="edit profile"),
     path('handlelogout/',views.handlelogout,name="logout"),
+    path('myjobs/',views.myjobs,name="shortlisted jobs"),
 ]
