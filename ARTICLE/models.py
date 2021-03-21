@@ -1,6 +1,7 @@
 from django.db import models
 from EMPLOYER.models import EMPLOYER
 from JOBSEEKER.models import JOBSEEKER
+from django.contrib.auth.models import User
 from django.utils.timezone import now
 # Create your models here.
 class ARTICLE(models.Model):
@@ -29,4 +30,22 @@ class COMMENT(models.Model):
     timestamp=models.DateTimeField(default=now)
 
     
+class TOPIC(models.Model):
+    topic_name=models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.topic_name
+
+class QUESTION(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    tag=models.ForeignKey(TOPIC,on_delete=models.CASCADE)
+    title=models.CharField(max_length=500)
+    desc=models.TextField()
+    problem_link=models.URLField(max_length=200,null=True,blank=True)
+    p_in=models.TextField(null=True,blank=True)
+    p_out=models.TextField(null=True,blank=True)
+    p_exin=models.TextField(null=True,blank=True)
+    p_exout=models.TextField(null=True,blank=True)
+    p_code=models.TextField(null=True,blank=True)
+
+    

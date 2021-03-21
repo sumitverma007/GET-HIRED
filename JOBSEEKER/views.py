@@ -198,23 +198,6 @@ def mymsg(request):
     }
     return render(request,"JOBSEEKER/notifications.html/",param)
 
-def prepare(request):
-    if request.user.is_authenticated:
-        try:
-            jobseeker=JOBSEEKER.objects.get(user=request.user)
-            notifications=SHORTLISTED.objects.filter(applicant=jobseeker,hasSeen=False)
-            notlen=len(notifications)
-            param={
-                'notlen':notlen,
-            }
-            return render(request,"JOBSEEKER/preparation.html/",param)
-
-
-        except:
-            return redirect('/')    
-
-    else:
-        return redirect('/')    
 
 def search(request):
     if request.method=='POST':
