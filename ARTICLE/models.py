@@ -42,10 +42,12 @@ class QUESTION(models.Model):
     title=models.CharField(max_length=500)
     desc=models.TextField()
     problem_link=models.URLField(max_length=200,null=True,blank=True)
+    constraint=models.TextField(null=True,blank=True,default="default constraint")
     p_in=models.TextField(null=True,blank=True)
     p_out=models.TextField(null=True,blank=True)
     p_exin=models.TextField(null=True,blank=True)
     p_exout=models.TextField(null=True,blank=True)
     p_code=models.TextField(null=True,blank=True)
+    pyurl=models.URLField(max_length=200,null=True,blank=True,default="https://www.google.com/")
 
     
