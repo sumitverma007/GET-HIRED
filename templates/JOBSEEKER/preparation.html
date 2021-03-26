@@ -4,30 +4,29 @@ Preparation
 {% endblock title %}
 {% block prepareactive %}
 active{% endblock prepareactive %}
+{% block style %}
+body{
+  background:none;
+}
+{% endblock style %}
 {% if notlen %}
 {% block notbadge %}
 <span class="badge badge-danger bg-danger">{{notlen}}</span>
 {% endblock notbadge %}
 
 {% endif %}
-{% block css  %}
-<style>
-body{
-    background-color:white;
-}
-</style>
-{% endblock css  %}
+
 {% block content %}
-    <main role="main">
+    <main role="main bg-light">
 
   <section class="jumbotron p-0 m-0 bg-light text-center">
-    <div class="container  ">
-      <h1 class="display-4">Tags</h1>
+   
+      <h1 class="display-4 m-0">Tags</h1>
       
-    </div>
+   
   </section>
 
-  <div class="album  bg-light">
+  <div class="album bg-light">
     <div class="container">
   
       <div class="row">

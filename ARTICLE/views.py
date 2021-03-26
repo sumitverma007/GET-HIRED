@@ -37,6 +37,8 @@ def prepare(request):
 def showproblem(request,tagname):
     tag=TOPIC.objects.get(topic_name=tagname)
     problems=QUESTION.objects.filter(tag=tag)
+    if len(problems) == 0:
+        return render(request,'JOBSEEKER/noproblem.html/')
     param={
         'problems':problems,
         'tag':tag,

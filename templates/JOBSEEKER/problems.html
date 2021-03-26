@@ -15,6 +15,14 @@
       margin:0;
       box-sizing:border-box;
   }
+  body{
+    background-image:linear-gradient(to right ,#14214E,#081b31,#283151); 
+  }
+  a{
+    text-decoration: none;
+    transition: .3s;
+  }
+ 
 .fc{
     display: block;
   width: 100%;
@@ -31,6 +39,14 @@
     padding:0;
 
 }
+.card{
+  background-color:none;
+  background-image: linear-gradient(to right , #deebe0,#c4d6cf,#a6acaa);
+
+}
+.card h3 a:hover{
+  color:rgb(22, 71, 22);
+}
   </style>
     <!-- Bootstrap CSS -->
     {% load static %}
@@ -41,15 +57,17 @@
     </title>
     <link rel="icon" href="{% static 'images/logo1.png/' %}" type="image/x-icon">
   </head>
-  <body class="bg-light">
-<div class="container border bg-light">
+  <body>
+<div class="container  bg-light">
 <div class="jumbotron text-center">
   <h1 class="display-4">Listed Problems</h1>
   </div>
    <a href="/prepare/" class="btn btn-warning btn-sm  "><i class="fa fa-arrow-circle-left"></i> <strong>Return to Problem Home</strong></a>
+
+ 
 {% for problem in problems %}
-<div class="card p-2 my-2 bg-light">
-<strong class="d-inline-block mb-2 text-primary">{{problem.tag.topic_name}}</strong>
+<div class="card p-2 my-2 border">
+<strong class="d-inline-block mb-2" style="color:#472508;">{{problem.tag.topic_name}}</strong>
 <h3 class="mb-0"><a class="text-dark" href="/prepare/{{problem.tag.topic_name}}/{{problem.id}}/" target="_blank">{{problem.title}}</a></h3>
 <div class="mb-1 text-muted"><i>Author :</i> {{problem.user.username}} </div>
 <p class="card-text mb-auto"><b>{{problem.desc|slice:":200"}}....</b></p>

@@ -29,7 +29,7 @@ active
       <td>{{applicant.applicant_job.job_title|title}}</td>
       <td>
       <form>{% csrf_token %}
-    <button type="button" id="erase-{{applicant.applicant.user.username}}-{{applicant.applicant_job.job_id}}" class="btn btn-danger btn-sm">Erase</button>
+    <button type="button" id="erase-{{applicant.applicant.user.username}}-{{applicant.applicant_job.job_id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Move to Bin</button>
       </form>
       </td>
     </tr>

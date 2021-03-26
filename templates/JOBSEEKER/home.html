@@ -16,7 +16,7 @@
 <div class="col-md-8 ml-1   article_content">
 <!-- one article post starts here-->
 {% for posts in recent_posts %}
- <div class="media  p-3 mb-2 border  media_content">
+ <div class="media  p-3 mb-2   media_content">
    <strong class="d-inline-block mb-2 content-tag">{{posts.0.tag}}</strong>
   <p>
      {% if posts.0.employer_name.profile_pic %}
@@ -184,7 +184,7 @@
 </div>
 <div class="col-md-4 p-2 aside-content">
 <div class="text-center">
-<h2 style="font-family: system-ui;color: #e8c2c2;">Follow Employers</h2>
+<h2>Follow Employers to see more content</h2>
 </div>
 {% for emp in emp_i_should_follow %}
 <div class="row">
@@ -192,7 +192,7 @@
 {{emp.name|title}}
 </div>
 <div class="col employer-follow">
-<button type="button" role="submit" id="emp-{{emp.user.username}}" value="{{emp.user.username}}" class="btn btn-success">Follow</button>
+<button type="button" role="submit" id="emp-{{emp.user.username}}" value="{{emp.user.username}}" class="btn btn-success"><i class="fas fa-user-plus"></i> Follow</button>
 </div>
 
 </div>
@@ -217,7 +217,10 @@ $.ajax({
 </script>
   <hr class="my-4">
 {% endfor %}
-
+<div class="text-center">
+<a class="follow-btn" href="/JOBSEEKER/follow-employee/">Follow More Employers <i class="fa fa-angle-double-right"></i></i></a> 
+<div>
 </div>
+
 </div>
 {% endblock content %}
