@@ -5,7 +5,7 @@ from EMPLOYER.models import EMPLOYER
 from django.contrib.auth.models import User
 from django.contrib import messages
 from BASE.models import Follow
-from ARTICLE.models import ARTICLE,LOVEDPOST,COMMENT 
+from ARTICLE.models import ARTICLE,LOVEDPOST,COMMENT,QUESTION,TOPIC 
 from JOB.models import SHORTLISTED,APPLICATIONS
 from django.http import JsonResponse
 from django.contrib.auth import authenticate,login,logout
@@ -74,6 +74,14 @@ def home(request):
             notifications=SHORTLISTED.objects.filter(applicant=obj,hasSeen=False)
             
             notlen=len(notifications)
+
+            topics=TOPIC.objects.all()
+            topictosend=[]
+            for topic in topics:
+                num=QUESTION.objects.filter(tag=topic).count()
+                topictosend.append([topic.topic_name,num])
+
+              
             param={
                 'jbasic':obj,
                 'jqual':user_qual,
@@ -82,6 +90,7 @@ def home(request):
                 'recent_posts':target_post,
                 'recent_post_cnt':recent_post_cnt,
                 'notlen':notlen,
+                'topics':topictosend,
             }
            
 

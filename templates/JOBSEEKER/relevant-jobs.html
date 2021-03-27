@@ -13,7 +13,10 @@ active
 {% endif %}
 {% block content %}
 {% if not len %}
-<h1>Not eligible for any jobs right now</h1>
+<div class="container text-center text-light my-3">
+<h1 class="display-4 ">Uhh oh ! No available jobs for you yet.You can still prepare though.</h1>
+<a href="/prepare/" class="movethewae">Explore Preparation  Section <i class="fa fa-angle-double-right"></i></a>
+</div>
 {% else %}
 <div class="container my-4">
 <table class="table text-light">

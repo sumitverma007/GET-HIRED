@@ -220,6 +220,24 @@ $.ajax({
 <div class="text-center">
 <a class="follow-btn" href="/JOBSEEKER/follow-employee/">Follow More Employers <i class="fa fa-angle-double-right"></i></i></a> 
 <div>
+<hr class="my-4">
+<div class="my-2">
+<div class="text-center">
+<h2>See our Practice Problems</h2>
+</div>
+<div class="tags my-2 ">
+
+{% for topic in topics %}
+
+<a class="mx-1 my-10" href="/prepare/{{topic.0}}/"><span class="bullet">{{topic.0}} <span class="badge bg-secondary badge-secondary">&nbsp;{{topic.1}}</span></span></a>
+
+{% endfor %}
+
+</div>
+</div>
+
+
+
 </div>
 
 </div>
