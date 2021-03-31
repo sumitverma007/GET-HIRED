@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -237,12 +238,12 @@ a:hover{
 <div class="container">
 	
     <div class="img">
-	{% load static %}
-        <img src="{%static 'images/interview.svg' %}">
+
+        <img src="{% static 'JOBSEEKER/images/interview.svg' %}">
     </div>
     <div class="login-content">
         <form id="login-form" method="POST" >{% csrf_token %}
-            <img src="{% static 'images/logo1.png' %}">
+            <img src="{% static 'JOBSEEKER/images/logo1.png' %}">
         
                <div class="input-div one">
                   <div class="i">

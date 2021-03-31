@@ -1,3 +1,4 @@
+ {% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -55,18 +56,18 @@ a:hover{
 
 </style>
     <!-- Bootstrap CSS -->
-    {% load static %}
+   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    
   
     <title>Problems-{{problem.tag.topic_name}}
     </title>
-    <link rel="icon" href="{% static 'images/logo1.png/' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'JOBSEEKER/images/logo1.png/' %}" type="image/x-icon">
   </head>
   <body>
 <div class="center text-center">
-    {% load static %}
-<img class="catimg" src="{% static 'images/caterror.jpg/ '%}">
+   
+<img class="catimg" src="{% static 'JOBSEEKER/images/caterror.jpg/ '%}">
 <h2 class="display-5 my-2">No Questions Added Under this Section Yet. </h2>
 <a href="/prepare/" class="movethewae">Explore other Tags <i class="fa fa-angle-double-right"></i></a>
 </div>
