@@ -21,7 +21,7 @@ active
   <img src="/media/{{emp.0.profile_pic}}" alt="img" class="mr-3 profile_img rounded-circle">
      {% else %}
      {% load static %}
-<img src="{% static 'images/emp_default.png/' %}"  class="mr-3 profile_img rounded-circle">
+<img src="{% static 'JOBSEEKER/images/emp_default.png' %}"  class="mr-3 profile_img rounded-circle">
  {% endif %}
   {{emp.0.name|title}}
   <span class="emp-follower "><i class="fa fa-user" aria-hidden="true"></i> {{emp.1}}</span>
