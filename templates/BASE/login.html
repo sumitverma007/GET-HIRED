@@ -20,13 +20,6 @@ body{
     overflow: hidden;
 }
 
-.wave{
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	height: 100%;
-	z-index: -1;
-}
 
 .container{
     width: 100vw;
@@ -191,7 +184,9 @@ a:hover{
 .btn:hover{
 	background-position: right;
 }
-
+#loginerror{
+	color:red;
+}
 
 @media screen and (max-width: 1050px){
 	.container{
@@ -223,9 +218,6 @@ a:hover{
 		display: none;
 	}
 
-	.wave{
-		display: none;
-	}
 
 	.login-content{
 		justify-content: center;
@@ -263,8 +255,9 @@ a:hover{
                        <input type="password" class="input" id="password">
                </div>
             </div>
-            <small id="loginerror" class="form-text lead text-danger"></small>
-            <input type="submit" class="btn" value="Login">
+            <small id="loginerror" class="lead"></small>
+            <input type="submit" class="btn" value="Login" id="logging">
+			<button type="submit" class="btn" id="loading"  style="display:none;" disabled>  <i class="fas fa-spinner fa-spin"></i> </button>
             <a href="/handlesignup/">New here?Sign Up here</a>
         </form>
     </div>
@@ -294,6 +287,8 @@ $(document).on('submit','#login-form',function(e){
 e.preventDefault();
 var username=$('#username').val();
 var password=$('#password').val();
+$("#logging").hide();
+$("#loading").show();
 $.ajax({
   type:'POST',
   url:'/handlelogin/',
@@ -309,6 +304,8 @@ $.ajax({
     }
     else{
         document.getElementById('loginerror').innerHTML="Incorrect Username or Password";
+		$("#loading").hide();
+		$("#logging").show();
     }
   }
 

@@ -351,10 +351,10 @@ def myjobs(request):
         myapplications = APPLICATIONS.objects.filter(applicant=jobseeker)
         shortlisted=SHORTLISTED.objects.filter(applicant=jobseeker)
         for app in shortlisted:
-            flist.append([app.applicant_job,"Accepted"])    
+            flist.append([app.applicant_job,"Accepted",1])    
 
         for app in myapplications:
-            flist.append([app.applicant_job,"Waiting"])
+            flist.append([app.applicant_job,"Pending",0])
 
         
         param={

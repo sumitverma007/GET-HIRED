@@ -21,7 +21,11 @@ My jobs
         <td>{{job.0.job_title}}</td>
         <td>{{job.0.job_desc}}</td>
         <td>{{job.0.employer_name.name}}</td>
+        {% if job.2 %}
         <td><span class="badge badge-pill badge-success bg-success">{{job.1}}</span></td>
+        {% else %}
+        <td><span style="background-color:orange;" class="badge badge-pill badge-warning">{{job.1}}</span></td>
+        {% endif %}
         </tr>
         {% endfor %}
 </tbody>
